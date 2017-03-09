@@ -1,10 +1,11 @@
 <?php
 
 	# The page's links.
+	$host = "http://qvvz.uk";
 	$links = ["Home"=>$host, "Minecraft Map"=>$host."/map"];
 
 	# HTML Header
-	$output = "<!DOCTYPE html>\n<html'>\n<head>\n<title>Welcome to Orion</title>\n
+	$output = "<!DOCTYPE html>\n<html>\n<head>\n<title>Welcome to Orion</title>\n
 	<link rel='stylesheet' type='text/css' href='css/default.css'>\n</head><body>";
 
 	#<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto'>
