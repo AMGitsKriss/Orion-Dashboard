@@ -35,6 +35,9 @@
 		return $result;
 	}
 
+	# Ross Quotes
+	$ross = file("ross_quotes.txt");
+
 	# Sidebar
 	$online_players = getUserList();
 	include_once("views/sidebar.php");
@@ -43,7 +46,7 @@
 	$output .= "<div id='mainsection'><div class=container>".file_get_contents("views/templates/adsense_leaderboard.html")."</div>";
 
 	$output .= "<div class=container><img src='images/0f00e3e818b461fb559a78f48ccbe285.gif'/>
-	<p>Ross says \"Hi.\"</p></div>";
+	<p>".$ross[mt_rand(0, count($ross) - 1)]."</p></div>";
 
 	#Bulk of page
 	$output .= "\n</div>";
