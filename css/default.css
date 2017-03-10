@@ -11,10 +11,9 @@ html, body {
 header {
 	background-color:#228855; 
 	color:white; 
-	max-width:100%; 
+	width:100%; 
 	margin: 0px; 
-	height:20px;
-	padding: 10px;
+	min-height:20px;
 }
 
 #mainsection, #sidebar {
@@ -36,7 +35,12 @@ header a{
 	text-decoration: none;
 	margin-right: 20px;
 	height:20px;
+	display: inline-block;
 	padding: 10px;
+
+}
+header a.options{
+	float:right;
 }
 header a:hover{
 	color:white;
@@ -60,5 +64,9 @@ header a:hover{
 }
 
 div.container {
+	max-width: 100%;
+}
+
+img {
 	max-width: 100%;
 }
