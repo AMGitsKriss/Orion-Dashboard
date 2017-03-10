@@ -2,9 +2,11 @@ html, body {
 	margin:0px; 
 	background-color:#EEEEEE;
 	font-family: Tahoma;
-	max-height: 100%;
 	height: 100%;
+	width: 100%;
 }
+
+
 
 header {
 	background-color:#228855; 
@@ -15,8 +17,18 @@ header {
 	padding: 10px;
 }
 
-section {
-	/*padding: 10px;*/
+#mainsection, #sidebar {
+	float: left;
+	height: 100%;
+}
+
+#mainsection {
+	margin-right: 10px;
+	width: calc(100% - 420px);
+}
+
+#sidebar {
+	max-width: 410px;
 }
 
 header a{
@@ -33,19 +45,20 @@ header a:hover{
 	background-color: #339966;
 }
 
-iframe.map {
-	position:relative;
-	width:100%;
-	height: 100%;
-	border: none;
-}
-
 .players-table, div.container {
 	background-color: white;
 	border-width: 1px;
 	border-color: #DDDDDD;
 	border-style: solid;
 	padding: 5px;
-	margin: 10px;
-	min-width: 300px;
+	margin: 10px 0px 0px 10px; /* Top and left margins */
+	
+}
+
+.players-table {
+	width: 400px;
+}
+
+div.container {
+	max-width: 100%;
 }
