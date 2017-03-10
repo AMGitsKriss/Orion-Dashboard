@@ -2,7 +2,7 @@
 
 	# The page's links.
 	$host = "http://qvvz.uk";
-	$links = ["Home"=>$host, "Minecraft Map"=>$host."/map"];
+	$links = ["Home"=>$host, "Minecraft Map"=>$host."/map", "Pathfinder Wiki"=>"http://www.d20pfsrd.com/' target='_blank"];
 
 	# HTML Header
 	$output = "<!DOCTYPE html>\n<html>\n<head>\n<title>Welcome to Orion</title>\n
