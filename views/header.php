@@ -7,7 +7,7 @@
 	$host = "http://qvvz.uk";
 	$links = [["Home", $host, '<i class="fa fa-home" aria-hidden="true"></i>'],
 		["Minecraft Map", $host."/map", '<i class="fa fa-globe" aria-hidden="true"></i>'],
-		["Pathfinder Wiki", "http://www.d20pfsrd.com/' target='_blank", '<i class="fa fa-bookmark" aria-hidden="true"></i>']]
+		["Pathfinder Wiki", "http://www.d20pfsrd.com/' target='_blank", '<i class="fa fa-bookmark" aria-hidden="true"></i>']];
 
 	# HTML Header
 	$output = "<!DOCTYPE html>\n<html>\n<head>\n<title>Welcome to Orion</title>\n
@@ -19,8 +19,8 @@
 	
 	# Navbar
 	$output .= "<header>";
-	foreach ($links as $key => $value){
-		$output .= "<a href='".$value."'><img src='images/home.png' /> ".$key."</a>";
+	foreach ($links as $row){
+		$output .= "<a href='$row[1]'>$row[2] $row[0]</a>";
 	}
 	$output .= "</header>";
 ?>
