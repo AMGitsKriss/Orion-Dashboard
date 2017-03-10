@@ -6,6 +6,7 @@
 
 	# HTML Header
 	$output = "<!DOCTYPE html>\n<html>\n<head>\n<title>Welcome to Orion</title>\n
+	<meta property='og:image' content='http://qvvz.uk/images/0f00e3e818b461fb559a78f48ccbe285.gif' />
 	<link rel='stylesheet' type='text/css' href='css/default.css'>\n</head><body>";
 
 	#<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto'>
