@@ -1,3 +1,4 @@
 RewriteEngine On
+rewriteRule ^map/?$ map/ [L,QSA]
 RewriteRule ^(....)/?$ index.php/?link=$1 [L,QSA]
 RewriteRule ^([0-9a-zA-Z]+)/?$ index.php/?page=$1 [L,QSA]
