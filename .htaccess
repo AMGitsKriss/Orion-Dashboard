@@ -1,2 +1,3 @@
 RewriteEngine On
-RewriteRule ^([0-9a-z]+)/?$ index.php/?page=$1 [L,NC,QSA]
+RewriteRule ^(....)/?$ index.php/?link=$1 [L,QSA]
+RewriteRule ^([0-9a-zA-Z]+)/?$ index.php/?page=$1 [L,QSA]
