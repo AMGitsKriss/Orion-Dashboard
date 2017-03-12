@@ -5,9 +5,8 @@
 	
 	function getUserList(){
 		
-		
-		require('lib/MinecraftQuery.php');
-		require('lib/MinecraftQueryException.php');
+		require('models/MinecraftQuery.class.php');
+		require('models/MinecraftQueryException.class.php');
 
 		$Query = new MinecraftQuery();
 

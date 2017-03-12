@@ -5,14 +5,31 @@
 
 	$signin_error = "";
 
+	/* TODO
+	# A Signed in user shouldn't be able to see this..
+	if(isset($_COOKIE["orion_user_session"])) {
+		header("Location: $host");
+	}
+	*/
+
 	# Check for a post request.
 	if(isset($_POST['signin-form'])){
-		# Hash the password
+		require("models/KConnect.class.php");
+		require("models/KUserManager.class.php");
 		# Load database
-		# Get things from the database
+		$database = new KConnect("localhost", $db_name , $db_user, $db_pass);
+		# Get user from the database
+		$loginCheck = new KUserManager($database, $_POST['username'], $_POST['password']);
 		# If accurate, sign in.
+		if($loginCheck->loginCheck()){
+			setcookie("orion_user_session", $_POST['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
+		}
 		# Else load the page with an error. 
-		$signin_error = "<p class=error>That's not implemented yet...</p>";
+		else{
+			$signin_error = "<p class=error>Invalid username or password.</p>";
+		}
+		# Kill the connection
+		$database = null;
 	}
 
 	$output.="<div class='signin-form'>
