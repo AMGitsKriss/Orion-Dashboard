@@ -1,6 +1,4 @@
 <?php
-	include_once("views/header.php");
-
 	# $output .= "<ul><li><a href='/map'>Minecraft Server Map</a></li><li><a href='/swn'>Stars Without Number Wiki</a></li>\n<li><a href='http://www.d20pfsrd.com/'>Pathfinder Rules (Wiki)</a></li>\n</ul>\n<p>";
 	use xPaw\MinecraftQuery;
 	use xPaw\MinecraftQueryException;

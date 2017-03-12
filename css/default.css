@@ -70,3 +70,30 @@ div.container {
 img {
 	max-width: 100%;
 }
+
+.signin-form {
+	background-image: url("../images/0f00e3e818b461fb559a78f48ccbe285.gif");
+	background-position: center;
+	background-size: cover;
+	height: calc(100vh - 40px);
+
+}
+.signin-form form{
+	position: absolute;
+	margin-left: 10%;
+	margin-top: 30vh;
+
+}
+input {
+	width: 300px;
+	height: 30px;
+	font-size: 1.1em;
+	font-family: Tahoma;
+	border: none;
+	border-radius: 3px;
+}
+input[type=submit]{
+	background-color: #228855;
+	color: white;
+	font-size: 1em;
+}

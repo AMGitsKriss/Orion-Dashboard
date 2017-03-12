@@ -5,10 +5,21 @@
 
 	$output .= "<section>";
 
-	if(!isset($_GET['page']))
-		include_once("controllers/home.php");
-	elseif($_GET['page']=="map")
-		include_once("controllers/map.php");
+	# Check for _POST requests
+
+	#Page navigator
+	$page = "";
+	if(isset($_GET['page'])) $page = $_GET['page'];
+	switch ($page){
+		case "login":
+			include_once("controllers/login.php");
+			break;
+
+		default:
+			include_once("controllers/home.php");
+			break;
+	}
+
  
 	$output .= "</section></body></html>";
 
