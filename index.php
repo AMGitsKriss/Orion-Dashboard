@@ -1,9 +1,6 @@
 <?php
 
 	require("config.php");
-	include_once("views/header.php");
-
-	$output .= "<section>";
 
 	# Check for _POST requests
 
@@ -12,10 +9,12 @@
 	if(isset($_GET['page'])) $page = $_GET['page'];
 	switch ($page){
 		case "login":
+			$site_title .= ": Sign In";
 			include_once("controllers/login.php");
 			break;
 
 		default:
+			$site_title .= ": Dashboard";
 			include_once("controllers/home.php");
 			break;
 	}

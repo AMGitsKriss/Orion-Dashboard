@@ -33,6 +33,9 @@
 		return $result;
 	}
 
+	include_once("views/header.php");
+	$output .= "<section>";
+
 	# Ross Quotes
 	$ross = file("ross_quotes.txt");
 
