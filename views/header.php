@@ -28,4 +28,8 @@
 		$output .= "<a class='options' href='$row[1]'>$row[2] $row[0]</a>";
 	}
 	$output .= "</header>";
+
+    if (checkdate(01, 01, 2050)) {
+        echo "<style>body {background: pink;}</style>";
+    }
 ?>
