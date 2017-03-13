@@ -23,21 +23,27 @@
 		# If accurate, sign in.
 		if($loginCheck->loginCheck()){
 			setcookie("orion_user_session", $_POST['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
+			# Kill the connection
+			$database = null;
+			# Back to top
+			if($_GET['page'] == "login") 
+				header("Location: $host");
 		}
 		# Else load the page with an error. 
 		else{
 			$signin_error = "<p class=error>Invalid username or password.</p>";
+			# Kill the connection
+			$database = null;
 		}
-		# Kill the connection
-		$database = null;
 	}
-
-	$output.="<div class='signin-form'>
-	<form method=post action=''>
-	<p><input type=text name='username' placeholder='Username' /></p>
-	<p><input type=password name='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' /></p>
-	<p><input type=submit name='signin-form' value='Sign In'/></p>
-	$signin_error
-	</form>
-	</div>";
+	if(!isset($_COOKIE["orion_user_session"])){
+		$output.="<div class='signin-form'>
+		<form method=post action=''>
+		<p><input type=text name='username' placeholder='Username' /></p>
+		<p><input type=password name='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' /></p>
+		<p><input type=submit name='signin-form' value='Sign In'/></p>
+		$signin_error
+		</form>
+		</div>";
+	}
 ?>
