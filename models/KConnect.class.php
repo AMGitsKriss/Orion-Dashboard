@@ -5,16 +5,10 @@
 		private $conn;
 
 		private $sql = [
-			"selectPost" => "SELECT * from LinkAggregator WHERE id=?",
-			"updatePost" => "",
-			"deletePost" => "DELETE FROM LinkAggregator where id=? AND owner=?",
-			"insertPost" => "INSERT INTO LinkAggregator (name, url, IP, owner) VALUES (?, ?, ?, ?)",
-			"selectList" => "SELECT id, added, name, url FROM LinkAggregator WHERE owner=? ORDER BY id DESC",
 			"selectUser" => "SELECT * FROM users WHERE username=?",
 			"insertUser" => "",
 			"selectMapShortcut" => "SELECT * FROM map_shortcuts WHERE name=?",
 			"updateMapShortcut" => "INSERT INTO map_shortcuts (name, x_pos, z_pos, zoom) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?, x_pos=?, z_pos=?, zoom=?",
-			"allMapShortcuts" => "SELECT * FROM map_shortcuts"
 		];
 
 		//Initialise the connection.
@@ -45,6 +39,20 @@
 		//Should not be called in regular use.
 		function getAll($table){
 			$sql = "SELECT * FROM $table";
+
+			$statement = $this->makeStatement($sql);
+			
+			$returnList = [];
+
+			//Get each row as "$value" and add it to the "$returnList" array.
+			while($value = $statement->fetch(PDO::FETCH_ASSOC)){
+				array_push($returnList, $value);
+			}
+			return $returnList;
+		}
+
+		function getByOrder($table){
+			$sql = "SELECT * FROM $table ORDER BY display_order";
 
 			$statement = $this->makeStatement($sql);
 			

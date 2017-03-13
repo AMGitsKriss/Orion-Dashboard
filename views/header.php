@@ -10,6 +10,8 @@
 	$controls = [["", $host."/login", '<i class="fa fa-sign-in" aria-hidden="true"></i>'],
 		["Repo", "https://github.com/AMGitsKriss/Orion-Dashboard' target='_blank", '<i class="fa fa-github" aria-hidden="true"></i>']];
 
+	$mapShortcuts = $database->getByOrder("map_shortcuts");
+
 	if(isset($_COOKIE["orion_user_session"])) {
 		$controls[0] = ["", $host."/logout", '<i class="fa fa-sign-out" aria-hidden="true"></i>'];
 		$controls[1] = ["", $host."/account", '<i class="fa fa-user-circle-o" aria-hidden="true"></i>'];
@@ -26,7 +28,20 @@
 	$output .= "<header>";
 	# Links (Left)
 	foreach ($links as $row){
-		$output .= "<a href='$row[1]'>$row[2] $row[0]</a>";
+		# Spit out links
+		# If this link is the map, print the shortcuts dropdown.
+		if($row[0] == "Minecraft Map"){
+			$output .= "\n<span class='dropdown'><a href='$row[1]'>$row[2] $row[0]</a><ul class='dropdown-content'>"; 
+			foreach ($mapShortcuts as $point){
+				$output .= "<li><a href='$host/map/#/$point[x_pos]/64/$point[z_pos]/$point[zoom]/0/0'>$point[name]</a></li>"; # <i class="fa fa-map-marker" aria-hidden="true"></i>
+			}
+			$output .= "</ul>";
+			$output .= "</span>";
+		}
+		
+		else{
+			$output .= "\n<a href='$row[1]'>$row[2] $row[0]</a>";
+		}
 	}
 	# Options (Right)
 	foreach ($controls as $row){
