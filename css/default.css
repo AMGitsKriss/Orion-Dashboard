@@ -33,7 +33,7 @@ header {
 header a{
 	color:white;
 	text-decoration: none;
-	margin-right: 20px;
+	margin-right: 10px;
 	height:20px;
 	display: inline-block;
 	padding: 10px;
@@ -45,7 +45,7 @@ header a.options{
 header a:hover{
 	color:white;
 	text-decoration: none;
-	margin-right: 20px;
+
 	background-color: #339966;
 }
 
