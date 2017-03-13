@@ -2,6 +2,10 @@
 
 	require("config.php");
 
+	# database connection GO!
+	require("models/KConnect.class.php");
+	$database = new KConnect("localhost", $db_name , $db_user, $db_pass);
+
 	# Is a user logged in?
 	if(isset($_COOKIE["orion_user_session"])) {
 		setcookie("orion_user_session", $_COOKIE["orion_user_session"], time() + (86400 * 30), "/"); // 86400 = 1 day

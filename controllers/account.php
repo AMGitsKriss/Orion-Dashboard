@@ -4,11 +4,9 @@
 	$output .= "<section>";
 
 	# Grab the database and user handler classes.
-	require("models/KConnect.class.php");
 	require("models/KUserManager.class.php");
 
-	# Start those things up!
-	$database = new KConnect("localhost", $db_name , $db_user, $db_pass);
+	# Start the user manager!
 	$userCheck = new KUserManager($database, $_COOKIE["orion_user_session"]);
 
 	# The user is updating their map co-ordinates

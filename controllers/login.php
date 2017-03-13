@@ -14,17 +14,13 @@
 
 	# Check for a post request.
 	if(isset($_POST['signin-form'])){
-		require("models/KConnect.class.php");
 		require("models/KUserManager.class.php");
-		# Load database
-		$database = new KConnect("localhost", $db_name , $db_user, $db_pass);
 		# Get user from the database
 		$loginCheck = new KUserManager($database, $_POST['username'], $_POST['password']);
 		# If accurate, sign in.
 		if($loginCheck->loginCheck()){
 			setcookie("orion_user_session", $_POST['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
-			# Kill the connection
-			$database = null;
+
 			# Back to top
 			# TODO - This might need refining for people who aren't 
 			if($_GET['page'] == "login") 
