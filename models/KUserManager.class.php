@@ -26,5 +26,15 @@
 			}
 			return false;
 		}
+
+		function getUSer($username){
+			$query = $this->database->query("selectUser", $this->username);
+			if($query->rowCount() == 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
+				$userdata->username = $row["username"];
+				$userdata->email = $row["email"];
+				$userdata->mc_username = $row["mc_username"];
+				$userdata->mc_avatar = $row["mc_avatar"];
+			}
+		}
 	}
 ?>
