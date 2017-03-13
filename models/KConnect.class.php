@@ -11,7 +11,10 @@
 			"insertPost" => "INSERT INTO LinkAggregator (name, url, IP, owner) VALUES (?, ?, ?, ?)",
 			"selectList" => "SELECT id, added, name, url FROM LinkAggregator WHERE owner=? ORDER BY id DESC",
 			"selectUser" => "SELECT * FROM users WHERE username=?",
-			"insertUser" => ""
+			"insertUser" => "",
+			"selectMapShortcut" => "SELECT * FROM map_shortcuts WHERE name=?",
+			"updateMapShortcut" => "INSERT INTO map_shortcuts (name, x_pos, z_pos, zoom) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?, x_pos=?, z_pos=?, zoom=?",
+			"allMapShortcuts" => "SELECT * FROM map_shortcuts"
 		];
 
 		//Initialise the connection.
