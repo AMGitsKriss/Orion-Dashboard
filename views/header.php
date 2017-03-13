@@ -10,6 +10,10 @@
 	$controls = [["", $host."/login", '<i class="fa fa-sign-in" aria-hidden="true"></i>'],
 		["Repo", "https://github.com/AMGitsKriss/Orion-Dashboard' target='_blank", '<i class="fa fa-github" aria-hidden="true"></i>']];
 
+	if(isset($_COOKIE["orion_user_session"])) {
+		$controls[0] = ["", $host."/logout", '<i class="fa fa-sign-out" aria-hidden="true"></i>'];
+	}
+
 	# HTML Header
 	$output = "<!DOCTYPE html>\n<html>\n<head>\n<title>$site_title</title>\n
 	<meta property='og:image' content='http://qvvz.uk/images/0f00e3e818b461fb559a78f48ccbe285.gif' />
