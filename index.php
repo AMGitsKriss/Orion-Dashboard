@@ -5,7 +5,7 @@
 	# Is a user logged in?
 	if(isset($_COOKIE["orion_user_session"])) {
 		setcookie("orion_user_session", $_COOKIE["orion_user_session"], time() + (86400 * 30), "/"); // 86400 = 1 day
-		echo "Signed in!";
+		echo "Signed in! $_COOKIE[orion_user_session]";
 	}
 
 	#Page navigator

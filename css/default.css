@@ -84,15 +84,19 @@ img {
 	margin-top: 30vh;
 
 }
-input {
-	width: 300px;
+
+form input, form select{
 	height: 30px;
 	font-size: 1.1em;
 	font-family: Tahoma;
 	border: none;
 	border-radius: 3px;
 }
-input[type=submit]{
+
+.signin-form form input {
+	width: 300px;
+}
+.signin-form form input[type=submit]{
 	background-color: #228855;
 	color: white;
 	font-size: 1em;
