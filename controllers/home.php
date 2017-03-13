@@ -3,7 +3,7 @@
 	use xPaw\MinecraftQuery;
 	use xPaw\MinecraftQueryException;
 	
-	function getUserList(){
+	function getUserList($host){
 		
 		require('models/MinecraftQuery.class.php');
 		require('models/MinecraftQueryException.class.php');
@@ -20,7 +20,11 @@
 		$result = Array();
 		if( ( $Players = $Query->GetPlayers( ) ) !== false ){
 			foreach( $Players as $Player ){
-				array_push($result, [htmlspecialchars( $Player ), "lib/MinecraftFace.php?u=$Player&s=30"]);
+				# Check if we have the thumbnail cached. If not, get it.
+				if(!file_exists("images/avatars/mc/$Player.png")){
+					file_put_contents("images/avatars/mc/$Player.png", file_get_contents("$host/models/MinecraftFace.php?u=$Player&s=30"));
+				}
+				array_push($result, [htmlspecialchars( $Player ), "images/avatars/mc/$Player.png"]);
 			}
 		}
 		elseif(!$Query->GetInfo()){
@@ -39,7 +43,7 @@
 	$ross = file("ross_quotes.txt");
 
 	# Sidebar
-	$online_players = getUserList();
+	$online_players = getUserList($host);
 	include_once("views/sidebar.php");
 
 	#Adsense

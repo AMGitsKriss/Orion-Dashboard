@@ -26,6 +26,7 @@
 			# Kill the connection
 			$database = null;
 			# Back to top
+			# TODO - This might need refining for people who aren't 
 			if($_GET['page'] == "login") 
 				header("Location: $host");
 		}
