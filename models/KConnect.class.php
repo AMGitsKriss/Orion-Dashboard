@@ -6,7 +6,7 @@
 
 		private $sql = [
 			"selectUser" => "SELECT * FROM users WHERE username=?",
-			"insertUser" => "",
+			"insertUser" => "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
 			"selectMapShortcut" => "SELECT * FROM map_shortcuts WHERE name=?",
 			"updateMapShortcut" => "INSERT INTO map_shortcuts (name, x_pos, z_pos, zoom) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?, x_pos=?, z_pos=?, zoom=?",
 		];
@@ -25,14 +25,19 @@
 		function makeStatement($sql, $data = null){
 			$statement = $this->conn->prepare( $sql );
 			try{
-				$statement->execute($data);
+				if($statement->execute($data)){
+					return $statement;
+				}
+				else{
+					return $statement->errorInfo()[2];
+				}
 			}
 			catch(Exception $e){
 				//spit back an error
 				$msg = "<p>You tried to run this sql: $entrySQL<p>\n<p>Exception: $e</p>";
 				trigger_error($msg);
 			}
-			return $statement;
+			return null;
 		}
 
 		//Returns all entries of a named table. 
@@ -43,6 +48,8 @@
 			$statement = $this->makeStatement($sql);
 			
 			$returnList = [];
+
+			print_r("<p>Uuh.. ".$statement."</p>");
 
 			//Get each row as "$value" and add it to the "$returnList" array.
 			while($value = $statement->fetch(PDO::FETCH_ASSOC)){
@@ -71,6 +78,8 @@
 			$key = array_shift($data);
 
 			$statement = $this->makeStatement($this->sql[$key], $data);
+
+			// This will either be an error string, or results.
 			return $statement;
 		}
 	}

@@ -29,6 +29,10 @@
 			$site_title .= ": Sign In";
 			include_once("controllers/login.php");
 			break;
+		case "register":
+			$site_title .= ": Register";
+			include_once("controllers/register.php");
+			break;
 		case "logout":
 			# Destroy the user session.
 			$site_title .= ": Sign Out";

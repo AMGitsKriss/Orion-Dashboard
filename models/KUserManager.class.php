@@ -17,12 +17,20 @@
 				$query = $this->database->query("selectUser", $username);
 				if($query->rowCount() == 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
 					$storedHash = $row["password"]; 
+					# If the password is right, and the user is approved
 					if($this->hasher->CheckPassword($password, $storedHash)){
-						return $row["username"];
+						# If approved, return the username
+						if($row["account_approved"] == true){
+							return $row["username"];
+						}
+						# Otherwise a loginerror
+						else {
+							return false;
+						}
 					}
 				}
 			}
-			return false;
+			return null;
 		}
 
 		function getUser($username){
@@ -36,6 +44,42 @@
 				return $userdata;
 			}
 			else return false;
+		}
+
+		function checkPasswordLength($password){
+			if(strlen($password) >= 6){
+				return true;
+			}
+			return false;
+		}
+
+		function makeUser($username, $email, $password){
+			# If the password hashes to something other than a hash...
+			if(($password = $this->hasher->HashPassword($password)) !== "*" && $this->checkPasswordLength($password)){
+				if($query = $this->database->query("insertUser", $username, $email, $password)){
+					# The only error here should be a duplicate key error.
+					if(gettype($query) == "string"){
+						return "That username already exists.";
+					}
+					#If it went without a hitch...
+					return true;
+				}
+
+			}
+			# If the password is too short
+			elseif(!checkPasswordLength($password)){
+				# TODO - Password too short
+				return "Password too short.";
+			}
+			# Else something went wrong with the hash
+			else{
+				# TODO - Some weird error. 
+				return "Something weird happened.";
+			}
+		}
+
+		function updatePassword($username){
+			# Words
 		}
 	}
 ?>
