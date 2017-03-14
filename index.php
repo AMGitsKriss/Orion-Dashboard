@@ -11,6 +11,9 @@
 		setcookie("orion_user_session", $_COOKIE["orion_user_session"], time() + (86400 * 30), "/"); // 86400 = 1 day
 	}
 
+	# Handling link codes.
+	if(isset($_GET['link '])) echo $_GET['link'];
+
 	#Page navigator
 	$page = "";
 	if(isset($_GET['page'])) $page = $_GET['page'];
