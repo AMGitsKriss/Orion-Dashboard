@@ -16,9 +16,9 @@
 	if(isset($_POST['signin-form'])){
 		require("models/KUserManager.class.php");
 		# Get user from the database
-		$loginCheck = new KUserManager($database, $_POST['username'], $_POST['password']);
+		$loginCheck = new KUserManager($database);
 		# If accurate, sign in.
-		if($loginCheck->loginCheck()){
+		if($loginCheck->loginCheck($_POST['username'], $_POST['password'])){
 			setcookie("orion_user_session", $_POST['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
 
 			# Back to top
@@ -29,18 +29,7 @@
 		# Else load the page with an error. 
 		else{
 			$signin_error = "<p class=error>Invalid username or password.</p>";
-			# Kill the connection
-			$database = null;
 		}
 	}
-	if(!isset($_COOKIE["orion_user_session"])){
-		$output.="<div class='signin-form'>
-		<form method=post action=''>
-		<p><input type=text name='username' placeholder='Username' /></p>
-		<p><input type=password name='password' placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;' /></p>
-		<p><input type=submit name='signin-form' value='Sign In'/></p>
-		$signin_error
-		</form>
-		</div>";
-	}
+	require_once("views/login.php");
 ?>

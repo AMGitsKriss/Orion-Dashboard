@@ -12,7 +12,7 @@
 			$this->database = $database;
 		}
 
-		function loginCheck(){
+		function loginCheck($username, $password){
 			if(isset($password) && isset($username)){
 				$query = $this->database->query("selectUser", $username);
 				if($query->rowCount() == 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
