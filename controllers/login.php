@@ -18,13 +18,17 @@
 		# Get user from the database
 		$loginCheck = new KUserManager($database);
 		# If accurate, sign in.
-		if($loginCheck->loginCheck($_POST['username'], $_POST['password'])){
+		$status = $loginCheck->loginCheck($_POST['username'], $_POST['password']);
+		if($status){
 			setcookie("orion_user_session", $_POST['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
 
 			# Back to top
 			# TODO - This might need refining for people who aren't 
 			if($_GET['page'] == "login") 
 				header("Location: $host");
+		}
+		elseif($status == false){
+			$signin_error = "<p class=error>You account is pending.</p>";
 		}
 		# Else load the page with an error. 
 		else{
