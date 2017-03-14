@@ -6,7 +6,10 @@ html, body {
 	width: 100%;
 }
 
-
+section {
+	padding: 10px;
+	padding-right: 0px;
+}
 
 header {
 	background-color:#228855; 
@@ -16,14 +19,17 @@ header {
 	min-height:20px;
 }
 
-#mainsection, #sidebar {
+#mainsection, #sidebar, #wholesection {
 	float: left;
 	height: 100%;
 }
 
 #mainsection {
-	margin-right: 10px;
-	width: calc(100% - 420px);
+	width: calc(100% - 410px);
+}
+
+#wholesection {
+	width: 100%;
 }
 
 #sidebar {
@@ -45,7 +51,6 @@ header a.options{
 header a:hover{
 	color:white;
 	text-decoration: none;
-
 	background-color: #339966;
 }
 
@@ -55,8 +60,7 @@ header a:hover{
 	border-color: #DDDDDD;
 	border-style: solid;
 	padding: 5px;
-	margin: 10px 0px 0px 10px; /* Top and left margins */
-	
+	margin: 0px 10px 10px 0px; /* Bottom and right margins */
 }
 
 .players-table {
@@ -76,6 +80,8 @@ img {
 	background-position: center;
 	background-size: cover;
 	height: calc(100vh - 40px);
+	margin-left: -10px;
+	margin-top: -10px;
 
 }
 .signin-form form{
@@ -86,22 +92,29 @@ img {
 }
 
 form input, form select{
+	border-width: 1px;
+	border-color: #DDDDDD;
+	border-style: solid;
 	height: 30px;
 	font-size: 1.1em;
 	font-family: Tahoma;
-	border: none;
 	border-radius: 3px;
 }
 
 .signin-form form input {
 	width: 300px;
 }
-.signin-form form input[type=submit]{
+form input[type=submit]{
 	background-color: #228855;
 	color: white;
+	border: none;
 	font-size: 1em;
 }
 
+.signin-form input[type=submit], .signin-form input[type=button]{
+	border: none;
+	width: 302px;
+}
 
 .dropdown-content {
 	display: none;
@@ -113,6 +126,7 @@ form input, form select{
 	list-style: none;
 	margin: 0px;
 	padding-left: 20px;
+	left: 110px;
 }
 
 .dropdown:hover .dropdown-content {

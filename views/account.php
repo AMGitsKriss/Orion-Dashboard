@@ -1,4 +1,5 @@
 <?php
+	$output .="<div id=wholesection><div class=container>";
 	if($userData){
 		$output .= "<p>$userData->username</p>";
 		$output .= "<p>$userData->email</p>";
@@ -33,4 +34,5 @@
 	else{
 		$output .= "<p class=error>Something weent wrong getting your map shortcut.</p>";
 	}
+	$output .= "</div></div>";
 ?>
