@@ -5,7 +5,9 @@
 
 	$signin_error = "";
 
-
+	if(isset($_COOKIE["orion_user_session"])){
+		header("Location: $host");
+	}
 	# Check for a post request.
 	if(isset($_POST['register-form'])){
 		require("models/KUserManager.class.php");
