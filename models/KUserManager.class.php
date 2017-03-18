@@ -37,6 +37,7 @@
 			$query = $this->database->query("selectUser", $username);
 			if($query->rowCount() == 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
 				$userdata = new stdClass();
+				#RETURNS THE FOLLOWING 
 				$userdata->username = $row["username"];
 				$userdata->email = $row["email"];
 				$userdata->mc_username = $row["mc_username"];
