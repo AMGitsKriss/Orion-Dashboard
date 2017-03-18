@@ -135,7 +135,7 @@ form input[type=submit]{
 .dropdown-content a{
 	float:right;
 	margin: 0px;
-	min-width: 100px;
+	min-width: 120px;
 	color: black;
 	background-color: white;
 	border-width: 2px;
