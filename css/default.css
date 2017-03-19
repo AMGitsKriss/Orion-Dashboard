@@ -150,20 +150,20 @@ form input[type=submit]{
     display: inline-block;
 }
 .link-hash {
-	width: 10%;
+	width: calc(10% - 5px);
 	text-align: center;
 }
 .link-controls, .link-date {
-	max-width: 5%;
-	text-align: center;
-	font-size: 0.7em;
+	width: calc(5% - 5px);
+	text-align: right;
+	font-size: 1em;
 }
 .link-name {
-	width: 30%;
+	width: calc(30% - 5px);
 	line-height: 100%;
 }
 .link-link {
-	width: 50%;
+	width: calc(50% - 5px);
 }
 .link-thumb {
 	width:100%;
@@ -190,3 +190,6 @@ form input[type=submit]{
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box; 
 }
+.fa-calendar {
+ 	cursor: pointer;
+ }
