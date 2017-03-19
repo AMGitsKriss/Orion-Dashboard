@@ -25,6 +25,13 @@
 				include_once("controllers/account.php");
 				break;
 			}
+		case "links":
+			# If logged in, go to account. Else, skip to login page.
+			if(isset($_COOKIE["orion_user_session"])){
+				$site_title .= ": Links";
+				include_once("controllers/links.php");
+				break;
+			}
 		case "login":
 			$site_title .= ": Sign In";
 			include_once("controllers/login.php");
