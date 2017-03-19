@@ -12,7 +12,7 @@
 	}
 
 	# Handling link codes.
-	if(isset($_GET['link '])) echo $_GET['link'];
+	if(isset($_GET['link'])) include_once("controllers/shorturl.php");
 
 	#Page navigator
 	$page = "";
@@ -29,7 +29,7 @@
 			# If logged in, go to account. Else, skip to login page.
 			if(isset($_COOKIE["orion_user_session"])){
 				$site_title .= ": Links";
-				include_once("controllers/links.php");
+				include_once("controllers/mylinks.php");
 				break;
 			}
 		case "login":

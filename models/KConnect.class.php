@@ -7,7 +7,7 @@
 		private $sql = [
 			"selectUser" => "SELECT * FROM users WHERE username=?",
 			"insertUser" => "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-			"selectURLHash" => "SELECT url, hash FROM LinkAggregator WHERE hash=?",
+			"selectURLHash" => "SELECT url, hash FROM LinkAggregator WHERE hash = ?",
 			"selectList" => "SELECT id, added, name, url, hash FROM LinkAggregator WHERE owner=? ORDER BY id DESC",
 			"selectMapShortcut" => "SELECT * FROM map_shortcuts WHERE name=?",
 			"updateMapShortcut" => "INSERT INTO map_shortcuts (name, x_pos, z_pos, zoom) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?, x_pos=?, z_pos=?, zoom=?",

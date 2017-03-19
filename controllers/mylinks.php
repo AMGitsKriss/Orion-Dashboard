@@ -17,6 +17,6 @@
 	//loading the lists, depending on user elevation
 	$result=$database->query("selectList", $_COOKIE["orion_user_session"]);
 
-	include("views/posts.php");
+	include("views/mylinks.php");
 	
 ?> 
