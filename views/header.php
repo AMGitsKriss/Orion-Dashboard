@@ -51,4 +51,23 @@
 		$output .= "<a class='options' href='$row[1]'>$row[2] $row[0]</a>";
 	}
 	$output .= "</header>";
+
+	function backgroundmanger($month ,$day ,$year){
+
+        	// bool checkdate ( int $month , int $day , int $year )
+        	// month - The month is between 1 and 12 inclusive.
+        	// day - The day is within the allowed number of days for the given month. Leap years are taken into consideration.
+        	// year -The year is between 1 and 32767 inclusive.
+		
+        	if (checkdate($month, $day, $year)) {
+            		echo "<style>body {background: pink;}</style>";
+        	}
+    	}
+
+    	try {
+        	backgroundmanger(01, 01, 2050);
+    	} catch (Exception $e) {
+        	echo "Caught exception: ",  $e->getMessage(), "\n";
+    	}
+    
 ?>
