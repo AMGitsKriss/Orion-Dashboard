@@ -13,7 +13,7 @@
 	# Build the position update form. 
 	# If the $userMapShortcut variable is a string, it's not in the list.
 	if(gettype($userMapShortcut) == "string"){ # $userMapShortcut[zoom]
-		$userMapShortcut = ["name"=>"", "x_pos"=>"", "z_pos"=>"", "zoom"=>""]
+		$userMapShortcut = ["name"=>"", "x_pos"=>"", "z_pos"=>"", "zoom"=>""];
 	}
 	$output .= "<form method=post><p>$userMapShortcut[name]'s home co-ordinates: 
 	<label>X: </label><input type=number name=x_pos min=-4000 max=4000 size=5 value=$userMapShortcut[x_pos] /> 
