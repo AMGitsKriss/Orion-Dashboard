@@ -9,3 +9,7 @@ Gaming community dashboard.
   * A page's GET statement.
   * URL Shortener
 * /? URL Poster/Shortener
+
+#### Database Tables
+* The navbar table isn't needed. 
+* linkaggregator->public seems redundant. 
