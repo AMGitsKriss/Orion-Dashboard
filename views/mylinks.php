@@ -11,7 +11,7 @@
 		<div class=link-hash><a href='$host/$row[hash]'>$row[hash]</a></div>
 		<div class=link-name>$linkName</div>
 		<div class=link-link><a href='$row[url]' target='_blank'>$row[url]</a></div>
-		<div class=link-controls><i class='fa fa-cog' aria-hidden=true></i> <a href='#' onclick='deleteEntry(\"delete_entry\", $row[id] )'><i class='fa fa-times' aria-hidden=true></i></a></div>
+		<div class=link-controls><a href='#' onclick='deleteEntry(\"delete_entry\", $row[id] )'><i class='fa fa-times' aria-hidden=true></i></a><i class='fa fa-cog' aria-hidden=true></i></div>
 		</div>\n";
 	}
 	$output .= "</div>";
