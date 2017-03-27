@@ -5,10 +5,11 @@
 
 	$output .= "<h2>Aggregator</h2>";
 
-	$sql = null;
 
-	//Logged in as... 
-	#include("views/heading.php");
+	$postLinkMsg = "";
+	if(isset($_POST['newlink'])){
+		$postLinkMsg = "<p>POST REQUEST SUCCESSFUL</p>";
+	}
 
 	//Parsing the webpage
 	require("models/KHTMLParser.class.php");
