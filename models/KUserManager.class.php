@@ -80,7 +80,48 @@
 		}
 
 		function updatePassword($username){
-			# Words
+			# TODO
+		}
+
+		function checkCookie($cookie){
+			$query = $database->query("selectCookie", $cookie)
+			//If the cookie is valid, update the timestamp and return true.
+			if($query->rowCount() == 1){
+				$this->updateCookie($cookie);
+				return true;
+			}
+			// Otherwise, the user's session has timed out. Change cookie to have expired already.
+			setcookie("orion_user_session", $cookie, time() - 86400, "/");
+			return false;
+		}
+
+		/*
+		 *	Update the expiry date on the database cookie.
+		 */
+		function updateCookie($cookie){
+			if($database->query("updateCookie", $cookie)){
+				return true;
+			}
+			return false;
+		}
+
+		//Calls updateCookie() with the pre-defined timelimit.
+		function purgeCookies(){
+			$days = 30;
+			$this->purgeCookies($days);
+		}
+
+		// A query to check the table for any entries more than 30 days old. OR user specified time.
+		function purgeCookies($days){
+			$database->query("purgeOldCookies", $days);
+		}
+
+		// Takes the username and adds a cookie in the database. If successful, adds in browser.
+		function setCookie($username){
+			$cookie = uniqid($username."_");
+			if($database->query("insertCookie", $cookie, $username)){
+				setcookie("orion_user_session", $cookie, time() + (86400 * 30), "/");
+			}
 		}
 	}
 ?>
