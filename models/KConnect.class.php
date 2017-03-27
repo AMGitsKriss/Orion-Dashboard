@@ -11,6 +11,8 @@
 			"selectList" => "SELECT id, added, name, url, hash FROM LinkAggregator WHERE owner=? ORDER BY id DESC",
 			"selectMapShortcut" => "SELECT * FROM map_shortcuts WHERE name=?",
 			"updateMapShortcut" => "INSERT INTO map_shortcuts (name, x_pos, z_pos, zoom) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?, x_pos=?, z_pos=?, zoom=?",
+			"deletePost" => "DELETE FROM LinkAggregator where id=? AND owner=?",
+			"insertPost" => "INSERT INTO LinkAggregator (name, url, IP, owner) VALUES (?, ?, ?, ?)"
 		];
 
 		//Initialise the connection.
