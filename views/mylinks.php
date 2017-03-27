@@ -1,5 +1,9 @@
 <?php
-	$output .= "<div class=container id=links>";
+	$output .= "<div class=container>";
+	$output .= "<p> To add an entry, either prefix the url with 'qvvz.uk/?' (e.g. qvvz.uk/?google.com) or use the following field: </p>";
+	$output .= "<form action='' method='post'>\n<label>URL:</label>\n<input id='name' name='url' size=50 type='text'>\n<input name='newlink' type='submit' value=' Add '>\n</form>\n";
+	$output .= $postLinkMsg;
+	$output .= "</div>\n<div class=container id=links>";
 	// output data of each row
 	while($row = $result->fetch(PDO::FETCH_ASSOC)) {
 		$added = $row['added'];
