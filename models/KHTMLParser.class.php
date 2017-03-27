@@ -54,6 +54,7 @@
 				$userCheck = new KUserManager($database);
 				// Insert the link & set the owner to this user,
 				$database->query("insertPost", $name, $url, $srcIp, $userCheck->getUser($_COOKIE['orion_user_session'])->username);
+				$database->query("shortenPost");
 				return true;
 			}
 			catch(Exception $e){

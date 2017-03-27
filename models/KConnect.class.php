@@ -12,7 +12,12 @@
 			"selectMapShortcut" => "SELECT * FROM map_shortcuts WHERE name=?",
 			"updateMapShortcut" => "INSERT INTO map_shortcuts (name, x_pos, z_pos, zoom) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=?, x_pos=?, z_pos=?, zoom=?",
 			"deletePost" => "DELETE FROM LinkAggregator where id=? AND owner=?",
-			"insertPost" => "INSERT INTO LinkAggregator (name, url, IP, owner) VALUES (?, ?, ?, ?)"
+			"insertPost" => "INSERT INTO LinkAggregator (name, url, IP, owner) VALUES (?, ?, ?, ?)",
+			"shortenPost" => "UPDATE LinkAggregator SET hash=concat(
+				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(id)*4294967296))*62+1, 1),
+				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*62+1, 1),
+				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*62+1, 1),
+				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed)*62+1, 1)) WHERE id = LAST_INSERT_ID()"
 		];
 
 		//Initialise the connection.

@@ -199,3 +199,7 @@ form input[type=submit]{
 .fa-calendar {
  	cursor: pointer;
  }
+
+i.fa.fa-times{
+	color: red;
+}
