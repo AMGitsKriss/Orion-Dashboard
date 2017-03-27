@@ -42,8 +42,18 @@
 	# Ross Quotes
 	$ross = file("ross_quotes.txt");
 
-	# Sidebar
+	## Sidebar
+	# Online Micnraft players
 	$online_players = getUserList($host);
+
+	# Teamspeak people online...
+	require_once("libraries/TeamSpeak3/TeamSpeak3.php");
+	# Connect to the server as admin
+	$ts3_VirtualServer = TeamSpeak3::factory("serverquery://$ts_username:$ts_password@192.168.0.23:10011/?server_port=9987");
+	// query clientlist from virtual server
+	$arr_ClientList = $ts3_VirtualServer->clientList();
+	$arr_ChannelList = $ts3_VirtualServer->channelList();
+
 	include_once("views/sidebar.php");
 
 	#Adsense

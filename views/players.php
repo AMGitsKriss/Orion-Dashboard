@@ -7,5 +7,5 @@
 		$output .= "<tr>\n<td>\n<img src='$player[1]' />$player[0]</td>\n</tr>\n";
 	}
 
-	$output .= "</tbody>\n</table>\n</div>";	
+	$output .= "</tbody>\n</table>";	
 ?>
