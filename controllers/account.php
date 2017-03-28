@@ -3,7 +3,7 @@
 	include_once("views/header.php");
 	$output .= "<section>";
 
-	$userData = $userCheck->getUser($username);
+	$userData = $loginCheck->getUser($username);
 
 	# The user is updating their map co-ordinates
 	if(isset($_POST['update_map_shortcut'])){

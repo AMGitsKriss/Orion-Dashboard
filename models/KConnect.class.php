@@ -19,7 +19,7 @@
 				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*62+1, 1),
 				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed)*62+1, 1)) WHERE id = LAST_INSERT_ID()",
 			"purgeOldCookies" => "DELETE FROM user_sessions WHERE updated < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL ? DAY))",
-			"insertCookie" => "INSERT INTO user_sessionss (cookie, username) VALUES (?, ?)",
+			"insertCookie" => "INSERT INTO user_sessions (cookie, username) VALUES (?, ?)",
 			"selectCookie" => "SELECT * FROM user_sessions WHERE cookie = ?",
 			"updateCookie" => "UPDATE user_sessions WHERE cookie = ? SET updated=CURRENT_TIMESTAMP"
 		];
