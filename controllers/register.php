@@ -5,14 +5,11 @@
 
 	$signin_error = "";
 
-	if(isset($_COOKIE["orion_user_session"])){
+	if($loggedIn){
 		header("Location: $host");
 	}
 	# Check for a post request.
 	if(isset($_POST['register-form'])){
-		require("models/KUserManager.class.php");
-		# Get user from the database
-		$loginCheck = new KUserManager($database);
 		$signin_error = "<p class=error>Yeah... That doesn't work yet.</p>";
 
 		# If there's invalid cahracters in the username...

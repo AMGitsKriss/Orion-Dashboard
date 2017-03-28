@@ -4,28 +4,22 @@
 	$output .= "<section>";
 
 	$signin_error = "";
-
-	/* TODO
 	# A Signed in user shouldn't be able to see this..
-	if(isset($_COOKIE["orion_user_session"])) {
+	if($loggedIn) {
 		header("Location: $host");
 	}
-	*/
 
 	# Check for a post request.
 	if(isset($_POST['signin-form'])){
-		require("models/KUserManager.class.php");
-		# Get user from the database
-		$loginCheck = new KUserManager($database);
 		# If accurate, sign in.
 		$status = $loginCheck->loginCheck($_POST['username'], $_POST['password']);
 		if($status){
-			setcookie("orion_user_session", $_POST['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
+			$loginCheck->setCookie($loginCheck->getUser($_POST['username'])->username);
 
 			# Back to top
 			# TODO - This might need refining for people who aren't 
 			if($_GET['page'] == "login") 
-				header("Location: $host");
+				//header("Location: $host");
 		}
 		elseif($status == false){
 			$signin_error = "<p class=error>You account is pending.</p>";

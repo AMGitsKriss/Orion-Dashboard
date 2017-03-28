@@ -1,6 +1,11 @@
 <?php
 	class KHTMLParser{
 
+		function __construct($database, $username){
+			$this->database = $database;
+			$this->username = $username;
+		}
+
 		//Parsing a webpage
 		function file_get_contents_curl($url){
 			$ch = curl_init();
@@ -27,7 +32,7 @@
 		/*
 		 *	Accepts the query string, since we should know it's a URL.
 		 */
-		function handle($url, $database){
+		function handle($url){
 			$url = $this->httpPrefix($url);
 			$urlContents = $this->file_get_contents_curl($url);
 
@@ -49,12 +54,9 @@
 			//Saving the IP of whoever added the link
 			$srcIp = $_SERVER['REMOTE_ADDR'];
 			try{
-				require("models/KUserManager.class.php");
-				# Get user from the database
-				$userCheck = new KUserManager($database);
 				// Insert the link & set the owner to this user,
-				$database->query("insertPost", $name, $url, $srcIp, $userCheck->getUser($_COOKIE['orion_user_session'])->username);
-				$database->query("shortenPost");
+				$this->database->query("insertPost", $name, $url, $srcIp, $this->username);
+				$this->database->query("shortenPost");
 				return true;
 			}
 			catch(Exception $e){
