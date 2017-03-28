@@ -12,7 +12,8 @@
 
 	$mapShortcuts = $database->getByOrder("map_shortcuts");
 
-	if($loggedIn) {
+	// TODO - This is a bodge for the time being.
+	if(isset($_COOKIE["orion_user_session"])) {
 		$controls[0] = ["", $host."/logout", '<i class="fa fa-sign-out" aria-hidden="true"></i>'];
 		$controls[1] = ["", $host."/account", '<i class="fa fa-user-circle-o" aria-hidden="true"></i>'];
 		$controls[2] = ["Repo", "https://github.com/AMGitsKriss/Orion-Dashboard' target='_blank", '<i class="fa fa-github" aria-hidden="true"></i>'];
