@@ -19,7 +19,7 @@
 			# Back to top
 			# TODO - This might need refining for people who aren't 
 			if($_GET['page'] == "login") 
-				//header("Location: $host");
+				header("Location: $host");
 		}
 		elseif($status == false){
 			$signin_error = "<p class=error>You account is pending.</p>";
