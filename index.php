@@ -6,9 +6,18 @@
 	require("models/KConnect.class.php");
 	$database = new KConnect("localhost", $db_name , $db_user, $db_pass);
 
+	// User manager class
+	require("models/KUserManager.class.php");
+	$loginCheck = new KUserManager($database);
+
 	# Is a user logged in?
-	if(isset($_COOKIE["orion_user_session"])) {
-		setcookie("orion_user_session", $_COOKIE["orion_user_session"], time() + (86400 * 30), "/"); // 86400 = 1 day
+	$loggedIn = false;
+	$username = null;
+	if(isset($_COOKIE["orion_user_session"]) && $loginCheck->checkCookie($_COOKIE["orion_user_session"])) {
+		$loggedIn = true;
+		$username = $loginCheck->getUsernameFromCookie($_COOKIE['orion_user_session']);
+		// Just to be sure we've got the case-correct username...
+		$username = $loginCheck->getUser($username)->username;
 	}
 
 	## 
@@ -34,14 +43,14 @@
 	switch ($page){
 		case "account":
 			# If logged in, go to account. Else, skip to login page.
-			if(isset($_COOKIE["orion_user_session"])){
+			if($loggedIn){
 				$site_title .= ": Account";
 				include_once("controllers/account.php");
 				break;
 			}
 		case "links":
 			# If logged in, go to account. Else, skip to login page.
-			if(isset($_COOKIE["orion_user_session"])){
+			if($loggedIn){
 				$site_title .= ": Links";
 				include_once("controllers/mylinks.php");
 				break;

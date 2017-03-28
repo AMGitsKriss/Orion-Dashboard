@@ -47,6 +47,13 @@
 			else return false;
 		}
 
+		function getUsernameFromCookie($cookie){
+			$query = $this->database->query("selectCookie", $cookie);
+			if($query->rowCount() == 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
+				return $row['username'];
+			}
+		}
+
 		function checkPasswordLength($password){
 			if(strlen($password) >= 6){
 				return true;
@@ -84,7 +91,7 @@
 		}
 
 		function checkCookie($cookie){
-			$query = $database->query("selectCookie", $cookie)
+			$query = $this->database->query("selectCookie", $cookie);
 			//If the cookie is valid, update the timestamp and return true.
 			if($query->rowCount() == 1){
 				$this->updateCookie($cookie);
@@ -99,29 +106,22 @@
 		 *	Update the expiry date on the database cookie.
 		 */
 		function updateCookie($cookie){
-			if($database->query("updateCookie", $cookie)){
+			if($this->database->query("updateCookie", $cookie)){
 				return true;
 			}
 			return false;
 		}
 
-		//Calls updateCookie() with the pre-defined timelimit.
-		function purgeCookies(){
-			$days = 30;
-			$this->purgeCookies($days);
-		}
-
 		// A query to check the table for any entries more than 30 days old. OR user specified time.
-		function purgeCookies($days){
-			$database->query("purgeOldCookies", $days);
+		function purgeCookies($days = 30){
+			$this->database->query("purgeOldCookies", $days);
 		}
 
 		// Takes the username and adds a cookie in the database. If successful, adds in browser.
 		function setCookie($username){
 			$cookie = uniqid($username."_");
-			if($database->query("insertCookie", $cookie, $username)){
-				setcookie("orion_user_session", $cookie, time() + (86400 * 30), "/");
-			}
+			$this->database->query("insertCookie", $cookie, $username);
+			setcookie("orion_user_session", $cookie, time() + (86400 * 30), "/");
 		}
 	}
 ?>
