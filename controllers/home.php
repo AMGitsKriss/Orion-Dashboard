@@ -39,9 +39,6 @@
 	include_once("views/header.php");
 	$output .= "<section>";
 
-	# Ross Quotes
-	$ross = file("ross_quotes.txt");
-
 	## Sidebar
 	# Online Micnraft players
 	$online_players = getUserList($host);
@@ -63,8 +60,18 @@
 	#Adsense
 	$output .= "<div id='mainsection'><div class=container>".file_get_contents("views/templates/adsense_leaderboard.html")."</div>";
 
+
+	# Ross Window
+	$ross = "Error: Failed to find any Ross Quotes.";
+	$query = $database->query("selectRossQuotes", $username);
+	if($query->rowCount() >= 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
+		$ross = $row['content'];
+	}
+	else{
+		$ross = "Error: $row";
+	}
 	$output .= "<div class=container><img src='images/0f00e3e818b461fb559a78f48ccbe285.gif'/>
-	<p>".$ross[mt_rand(0, count($ross) - 1)]."</p></div>";
+	<p>".$ross."</p></div>";
 
 	#Bulk of page
 	$output .= "\n</div>";
