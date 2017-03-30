@@ -21,7 +21,8 @@
 			"purgeOldCookies" => "DELETE FROM user_sessions WHERE updated < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL ? DAY))",
 			"insertCookie" => "INSERT INTO user_sessions (cookie, username) VALUES (?, ?)",
 			"selectCookie" => "SELECT * FROM user_sessions WHERE cookie = ?",
-			"updateCookie" => "UPDATE user_sessions WHERE cookie = ? SET updated=CURRENT_TIMESTAMP"
+			"updateCookie" => "UPDATE user_sessions WHERE cookie = ? SET updated=CURRENT_TIMESTAMP",
+			"selectRossQuotes" => "SELECT * FROM posts WHERE category = 'Ross Quotes' ORDER BY RAND() LIMIT 1"
 		];
 
 		//Initialise the connection.
