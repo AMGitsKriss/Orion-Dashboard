@@ -86,8 +86,21 @@
 			}
 		}
 
-		function updatePassword($username){
-			# TODO
+		function updatePassword($username, $password){
+			# If the password hashes to something other than a star...
+			if(($password = $this->hasher->HashPassword($password)) !== "*" && $this->checkPasswordLength($password)){
+				if($query = $this->database->query("updateUserPass", $username, $password)){
+					# The only error here should be a duplicate key error.
+					if(gettype($query) == "string"){
+						// There's an error of some form. Return the string.
+						return $query;
+					}
+					#If it went without a hitch...
+					return true;
+				}
+				# The query failed somehow
+				return false;
+			}
 		}
 
 		function checkCookie($cookie){

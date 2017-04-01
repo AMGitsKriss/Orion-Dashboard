@@ -22,7 +22,8 @@
 			"insertCookie" => "INSERT INTO user_sessions (cookie, username) VALUES (?, ?)",
 			"selectCookie" => "SELECT * FROM user_sessions WHERE cookie = ?",
 			"updateCookie" => "UPDATE user_sessions WHERE cookie = ? SET updated=CURRENT_TIMESTAMP",
-			"selectRossQuotes" => "SELECT * FROM posts WHERE category = 'Ross Quotes' ORDER BY RAND() LIMIT 1"
+			"selectRossQuotes" => "SELECT * FROM posts WHERE category = 'Ross Quotes' ORDER BY RAND() LIMIT 1",
+			"updateUserPass" => "UPDATE users WHERE username = ? SET password = ?"
 		];
 
 		//Initialise the connection.
