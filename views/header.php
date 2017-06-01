@@ -23,7 +23,7 @@
 	}
 
 	# HTML Header
-	$output = "<!DOCTYPE html>\n<html>\n<head>\n<title>$site_title</title>\n
+	$output = "<!DOCTYPE html>\n<html lang='en'>\n<head>\n<title>$site_title</title>\n
 	<meta property='og:image' content='http://qvvz.uk/images/0f00e3e818b461fb559a78f48ccbe285.gif' />
 	<script src='https://use.fontawesome.com/15e142434c.js'></script>
 	<link rel='stylesheet' type='text/css' href='css/default.css'>\n</head><body>";
