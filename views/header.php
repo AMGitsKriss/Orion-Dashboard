@@ -12,6 +12,7 @@
 
 	$mapShortcuts = $database->getByOrder("map_shortcuts");
 
+	// TODO - This is a bodge for the time being.
 	if(isset($_COOKIE["orion_user_session"])) {
 		$controls[0] = ["", $host."/logout", '<i class="fa fa-sign-out" aria-hidden="true"></i>'];
 		$controls[1] = ["", $host."/account", '<i class="fa fa-user-circle-o" aria-hidden="true"></i>'];
@@ -22,7 +23,7 @@
 	}
 
 	# HTML Header
-	$output = "<!DOCTYPE html>\n<html>\n<head>\n<title>$site_title</title>\n
+	$output = "<!DOCTYPE html>\n<html lang='en'>\n<head>\n<title>$site_title</title>\n
 	<meta property='og:image' content='http://qvvz.uk/images/0f00e3e818b461fb559a78f48ccbe285.gif' />
 	<script src='https://use.fontawesome.com/15e142434c.js'></script>
 	<link rel='stylesheet' type='text/css' href='css/default.css'>\n</head><body>";
