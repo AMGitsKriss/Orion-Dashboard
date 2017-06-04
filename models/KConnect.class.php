@@ -17,7 +17,13 @@
 				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(id)*4294967296))*62+1, 1),
 				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*62+1, 1),
 				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed:=round(rand(@seed)*4294967296))*62+1, 1),
-				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed)*62+1, 1)) WHERE id = LAST_INSERT_ID()"
+				substring('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', rand(@seed)*62+1, 1)) WHERE id = LAST_INSERT_ID()",
+			"purgeOldCookies" => "DELETE FROM user_sessions WHERE updated < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL ? DAY))",
+			"insertCookie" => "INSERT INTO user_sessions (cookie, username) VALUES (?, ?)",
+			"selectCookie" => "SELECT * FROM user_sessions WHERE cookie = ?",
+			"updateCookie" => "UPDATE user_sessions WHERE cookie = ? SET updated=CURRENT_TIMESTAMP",
+			"selectRossQuotes" => "SELECT * FROM posts WHERE category = 'Ross Quotes' ORDER BY RAND() LIMIT 1",
+			"updateUserPass" => "UPDATE users WHERE username = ? SET password = ?"
 		];
 
 		//Initialise the connection.
@@ -31,6 +37,9 @@
 			}
 		}
 
+		/*
+		 *	TODO - Write about what the hell this function returns!
+		 */
 		function makeStatement($sql, $data = null){
 			$statement = $this->conn->prepare( $sql );
 			try{

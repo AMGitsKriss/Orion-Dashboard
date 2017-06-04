@@ -47,6 +47,13 @@
 			else return false;
 		}
 
+		function getUsernameFromCookie($cookie){
+			$query = $this->database->query("selectCookie", $cookie);
+			if($query->rowCount() == 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
+				return $row['username'];
+			}
+		}
+
 		function checkPasswordLength($password){
 			if(strlen($password) >= 6){
 				return true;
@@ -79,8 +86,55 @@
 			}
 		}
 
-		function updatePassword($username){
-			# Words
+		function updatePassword($username, $password){
+			# If the password hashes to something other than a star...
+			if(($password = $this->hasher->HashPassword($password)) !== "*" && $this->checkPasswordLength($password)){
+				if($query = $this->database->query("updateUserPass", $username, $password)){
+					# The only error here should be a duplicate key error.
+					if(gettype($query) == "string"){
+						// There's an error of some form. Return the string.
+						return $query;
+					}
+					#If it went without a hitch...
+					return true;
+				}
+				# The query failed somehow
+				return false;
+			}
+		}
+
+		function checkCookie($cookie){
+			$query = $this->database->query("selectCookie", $cookie);
+			//If the cookie is valid, update the timestamp and return true.
+			if($query->rowCount() == 1){
+				$this->updateCookie($cookie);
+				return true;
+			}
+			// Otherwise, the user's session has timed out. Change cookie to have expired already.
+			setcookie("orion_user_session", $cookie, time() - 86400, "/");
+			return false;
+		}
+
+		/*
+		 *	Update the expiry date on the database cookie.
+		 */
+		function updateCookie($cookie){
+			if($this->database->query("updateCookie", $cookie)){
+				return true;
+			}
+			return false;
+		}
+
+		// A query to check the table for any entries more than 30 days old. OR user specified time.
+		function purgeCookies($days = 30){
+			$this->database->query("purgeOldCookies", $days);
+		}
+
+		// Takes the username and adds a cookie in the database. If successful, adds in browser.
+		function setCookie($username){
+			$cookie = uniqid($username."_");
+			$this->database->query("insertCookie", $cookie, $username);
+			setcookie("orion_user_session", $cookie, time() + (86400 * 30), "/");
 		}
 	}
 ?>
