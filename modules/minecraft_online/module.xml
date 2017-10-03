@@ -1,0 +1,6 @@
+<!-- TODO - XML headers -->
+<module>
+	<name>Minecraft Online</name>
+	<version>1.0</version>
+	<description>A module to query a minecraft server and display the users online.</description>
+</module>
