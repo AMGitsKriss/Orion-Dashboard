@@ -15,8 +15,8 @@
 		$zoom = $_POST['zoom'];
 
 		//Verify that these values fit the world contstraints. It's a hack, but if it's outside the range, we'll just set it to 0.
-		$xPos = ($xPos < 4000 || $xPos > -4000) ? $xPos : 0;
-		$zPos = ($zPos < 4000 || $zPos > -4000) ? $zPos : 0;
+		$xPos = ($xPos > 4000 || $xPos < -4000) ? $xPos : 0;
+		$zPos = ($zPos > 4000 || $zPos < -4000) ? $zPos : 0;
 		$zoom = ($zoom < -5 || $zoom > -1) ? $zPos : -3;
 
 		$database->query("updateMapShortcut", $username, $xPos, $zPos, $zoom, $username, $xPos, $zPos, $zoom);
