@@ -55,6 +55,13 @@
 				include_once("controllers/mylinks.php");
 				break;
 			}
+		case "projects":
+			# If logged in, go to account. Else, skip to login page.
+			if($loggedIn){
+				$site_title .= ": Project Tracking";
+				include_once("controllers/projects/index.php");
+				break;
+			}
 		case "login":
 			$site_title .= ": Sign In";
 			include_once("controllers/login.php");
@@ -70,7 +77,7 @@
 			break;
 		default:
 			$site_title .= ": Dashboard";
-			include_once("controllers/home.php");
+			include_once("controllers/homecontroller.php");
 			break;
 	}
 
