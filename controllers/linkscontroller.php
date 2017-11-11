@@ -1,7 +1,7 @@
 <?php
+	
+	include_once("controllers/commoncontroller.php");
 
-	$viewData = new stdClass();
-	$viewData->site_title = $site_title;
 	$viewData->page_title = "Aggregator";
 
 	//Parsing the webpage
@@ -30,7 +30,6 @@
 	//loading the lists, depending on user elevation
 	$viewData->content=$database->query("selectList", $username);
 
-	include_once("controllers/commoncontroller.php");
 	include_once("views/linksview.php");
 	
 ?> 

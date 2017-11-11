@@ -1,8 +1,7 @@
 <?php
 
-	include_once("views/header.php");
-	$output .= "<section>";
-
+	include_once("controllers/commoncontroller.php");
+	
 	$signin_error = "";
 
 	if($loggedIn){
@@ -33,5 +32,6 @@
 			$signin_error = "<p class=error>Those passwords didn't match.</p>";
 		}
 	}
-	require_once("views/register.php");
+
+	include_once("views/registerview.php");
 ?>
