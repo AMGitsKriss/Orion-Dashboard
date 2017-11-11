@@ -52,14 +52,14 @@
 			# If logged in, go to account. Else, skip to login page.
 			if($loggedIn){
 				$site_title .= ": Links";
-				include_once("controllers/mylinks.php");
+				include_once("controllers/linkscontroller.php");
 				break;
 			}
 		case "projects":
 			# If logged in, go to account. Else, skip to login page.
 			if($loggedIn){
 				$site_title .= ": Project Tracking";
-				include_once("controllers/projects/index.php");
+				include_once("controllers/projects/projects.php");
 				break;
 			}
 		case "login":
@@ -80,10 +80,4 @@
 			include_once("controllers/homecontroller.php");
 			break;
 	}
-
-
- 
-	$output .= "</section></body></html>";
-
-	echo $output;
 ?> 

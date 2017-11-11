@@ -13,13 +13,18 @@
 	<header>
 		<?php foreach ($links as $row): 
 			if($row[0] == "Minecraft Map"):
-				echo "<span class='dropdown'><a href='$row[1]'>$row[2] $row[0]</a><ul class='dropdown-content'>\n";
+				echo "<span class='dropdown'><a href='$row[1]'>$row[0]</a><ul class='dropdown-content'>\n";
 				foreach ($mapShortcuts as $point): 
 					echo "<li><a href='$host/map/#/$point[x_pos]/64/$point[z_pos]/$point[zoom]/0/0'>$point[name]</a></li>\n";
 				endforeach;
 				echo "</ul></span>\n";
 			else:
-				echo "<a href='$row[1]'>$row[2] $row[0]</a>\n";
+				echo "<a href='$row[1]'>$row[0]</a>\n";
 			endif;
 		endforeach; ?>
+
+		<?php foreach ($controls as $row): ?>
+			<a class="options" href="<?php echo $row[1] ?>"><?php echo $row[0] ?></a>
+		<?php endforeach; ?>
 	</header>
+	<section>

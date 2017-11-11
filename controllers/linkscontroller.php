@@ -1,10 +1,8 @@
 <?php
 
-	include_once("views/header.php");
-	$output .= "<script type='text/javascript' src='scripts/functions.js'></script>\n";
-	$output .= "<section>";
-
-	$output .= "<h2>Aggregator</h2>";
+	$viewData = new stdClass();
+	$viewData->site_title = $site_title;
+	$viewData->page_title = "Aggregator";
 
 	//Parsing the webpage
 	require("models/KHTMLParser.class.php");
@@ -12,12 +10,12 @@
 	$postLinkMsg = "";
 
 	if(isset($_POST['delete_entry'])){
-		//TODO - Delete that entry.
+		// Delete that entry.
 		$database->query("deletePost", $_POST['delete_entry'], $username);
 		$postLinkMsg = "<p>Link successfully deleted.</p>";
 	}
 
-	# If we're here with the query sting, and not another page, and the parser triggers successfully.
+	// If we're here with the query sting, and not another page, hand the URL to the parser triggers successfully.
 	if($_SERVER['QUERY_STRING'] != "" && !isset($_GET['link']) && !isset($_GET['page']) && $parser->handle($_SERVER['QUERY_STRING'])){
 		header("Location: $host/links");
 	}
@@ -30,8 +28,9 @@
 	}
 
 	//loading the lists, depending on user elevation
-	$result=$database->query("selectList", $username);
+	$viewData->content=$database->query("selectList", $username);
 
-	include("views/mylinks.php");
+	include_once("controllers/commoncontroller.php");
+	include_once("views/linksview.php");
 	
 ?> 

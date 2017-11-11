@@ -17,6 +17,7 @@
 		}
 
 		$result = Array();
+		$result["struct"] = "table";
 		if( ( $Players = $Query->GetPlayers( ) ) !== false ){
 			foreach( $Players as $Player ){
 				# Check if we have the thumbnail cached. If not, get it.
@@ -30,51 +31,10 @@
 			$result = [["<div style='color:red; font-weight:bold; text-align:center;'>SERVER OFFLINE</div>", ""]];
 		}
 		else{
-			$result = [["<div style='text-align:center; width:100%;'>Nobody's Online ;(</div>",""]];
+			$result = [["<div style='text-align:center; width:100%;'>Nobody's Online :(</div>",""]];
 		}
 		return $result;
 	}
-
-	$viewData = new stdClass();
-	$viewData->site_title = $site_title;
-	$viewData->sidebar[0] = getUserList($host);
-	$viewData->sidebar[1] = null; // Grab the user cache for TS3
-	$viewData->content = ["There's nothing here... Yet."];
-
-	include_once("controllers/commoncontroller.php");
-	$output = "<section>";
-
-	// If the ts3 online-users cache file is more than a minute old, we'll regenerate it before displaying it.
-	if(time() - filemtime("views/templates/cache_ts3.html") > 60){
-		try{
-			updateTS3Cache($ts_username, $ts_password);
-		}
-		// We've flooded the query system and timed it out.
-		catch (Exception $e) {
-
-		}
-	}
-
-	include_once("views/sidebar.php");
-
-	#Adsense
-	$output .= "<div id='mainsection'><div class=container>".file_get_contents("views/templates/adsense_leaderboard.html")."</div>";
-
-
-	# Ross Window
-	$ross = "Error: Failed to find any Ross Quotes.";
-	$query = $database->query("selectRossQuotes", $username);
-	if($query->rowCount() >= 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
-		$ross = $row['content'];
-	}
-	else{
-		$ross = "Error: No snarky comments are saved...";
-	}
-	$output .= "<div class=container><img src='images/0f00e3e818b461fb559a78f48ccbe285.gif'/>
-	<p>".$ross."</p></div>";
-
-	#Bulk of page
-	$output .= "\n</div>";
 
 	function updateTS3Cache($ts_username, $ts_password){
 		# Teamspeak people online...
@@ -106,4 +66,34 @@
 		// Close table
 		fwrite($cache_file, "</tbody>\n</table>");	
 	}
+
+	// Data object to hand to the view.
+	$viewData = new stdClass();
+	$viewData->site_title = $site_title;
+	$viewData->sidebar[0] = getUserList($host);
+	$viewData->sidebar[1] = file_get_contents("views/templates/cache_ts3.html"); // Grab the user cache for TS3
+
+	$output = "";
+
+	// If the ts3 online-users cache file is more than a minute old, we'll regenerate it before displaying it.
+	if(time() - filemtime("views/templates/cache_ts3.html") > 60){
+		try{
+			updateTS3Cache($ts_username, $ts_password);
+		}
+		// We've flooded the query system and timed it out.
+		catch (Exception $e) {
+
+		}
+	}
+
+	# Ross Window
+	$viewData->content = "Error: Failed to find any Ross Quotes.";
+	$query = $database->query("selectRossQuotes", $username);
+	if($query->rowCount() >= 1 && $row = $query->fetch(PDO::FETCH_ASSOC)){
+		$viewData->content = $row['content'];
+	}
+
+	include_once("controllers/commoncontroller.php");
+	include_once("views/sidebarview.php");
+	include_once("views/homeview.php");
 ?>
