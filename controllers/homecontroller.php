@@ -1,5 +1,4 @@
 <?php
-	# $output .= "<ul><li><a href='/map'>Minecraft Server Map</a></li><li><a href='/swn'>Stars Without Number Wiki</a></li>\n<li><a href='http://www.d20pfsrd.com/'>Pathfinder Rules (Wiki)</a></li>\n</ul>\n<p>";
 	use xPaw\MinecraftQuery;
 	use xPaw\MinecraftQueryException;
 	
@@ -36,13 +35,14 @@
 		return $result;
 	}
 
-	include_once("views/header.php");
-	$output .= "<section>";
+	$viewData = new stdClass();
+	$viewData->site_title = $site_title;
+	$viewData->sidebar[0] = getUserList($host);
+	$viewData->sidebar[1] = null; // Grab the user cache for TS3
+	$viewData->content = ["There's nothing here... Yet."];
 
-	## Sidebar
-	# Online Micnraft players
-	$online_players = getUserList($host);
-
+	include_once("controllers/commoncontroller.php");
+	$output = "<section>";
 
 	// If the ts3 online-users cache file is more than a minute old, we'll regenerate it before displaying it.
 	if(time() - filemtime("views/templates/cache_ts3.html") > 60){
@@ -50,7 +50,7 @@
 			updateTS3Cache($ts_username, $ts_password);
 		}
 		// We've flooded the query system and timed it out.
-		catch (TeamSpeak3_Adapter_ServerQuery_Exception $e) {
+		catch (Exception $e) {
 
 		}
 	}
@@ -68,7 +68,7 @@
 		$ross = $row['content'];
 	}
 	else{
-		$ross = "Error: $row";
+		$ross = "Error: No snarky comments are saved...";
 	}
 	$output .= "<div class=container><img src='images/0f00e3e818b461fb559a78f48ccbe285.gif'/>
 	<p>".$ross."</p></div>";
