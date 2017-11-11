@@ -1,5 +1,9 @@
 <?php
-	
+
+	// Data object to hand to the view.	
+	$viewData = new stdClass();
+	$viewData->site_title = $site_title;
+
 	# The page's links.
 	/*
 	 *	where each row: [0] = Name, [1] = URL, [2] = Icon

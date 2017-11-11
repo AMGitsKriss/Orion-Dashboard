@@ -1,4 +1,7 @@
 <?php
+
+	include_once("controllers/commoncontroller.php");
+
 	use xPaw\MinecraftQuery;
 	use xPaw\MinecraftQueryException;
 	
@@ -67,13 +70,8 @@
 		fwrite($cache_file, "</tbody>\n</table>");	
 	}
 
-	// Data object to hand to the view.
-	$viewData = new stdClass();
-	$viewData->site_title = $site_title;
 	$viewData->sidebar[0] = getUserList($host);
 	$viewData->sidebar[1] = file_get_contents("views/templates/cache_ts3.html"); // Grab the user cache for TS3
-
-	$output = "";
 
 	// If the ts3 online-users cache file is more than a minute old, we'll regenerate it before displaying it.
 	if(time() - filemtime("views/templates/cache_ts3.html") > 60){
@@ -93,7 +91,6 @@
 		$viewData->content = $row['content'];
 	}
 
-	include_once("controllers/commoncontroller.php");
 	include_once("views/sidebarview.php");
 	include_once("views/homeview.php");
 ?>

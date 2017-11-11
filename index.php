@@ -45,7 +45,7 @@
 			# If logged in, go to account. Else, skip to login page.
 			if($loggedIn){
 				$site_title .= ": Account";
-				include_once("controllers/account.php");
+				include_once("controllers/accountcontroller.php");
 				break;
 			}
 		case "links":
@@ -64,11 +64,11 @@
 			}
 		case "login":
 			$site_title .= ": Sign In";
-			include_once("controllers/login.php");
+			include_once("controllers/logincontroller.php");
 			break;
 		case "register":
 			$site_title .= ": Register";
-			include_once("controllers/register.php");
+			include_once("controllers/registercontroller.php");
 			break;
 		case "logout":
 			# Destroy the user session.
