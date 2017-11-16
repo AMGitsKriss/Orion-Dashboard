@@ -4,12 +4,6 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Database: `orion_dashboard`
---
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `linkaggregator`
 --
 CREATE TABLE IF NOT EXISTS `linkaggregator` (
@@ -23,8 +17,6 @@ CREATE TABLE IF NOT EXISTS `linkaggregator` (
   `hash` varchar(4) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `map_shortcuts`
 --
@@ -36,8 +28,6 @@ CREATE TABLE IF NOT EXISTS `map_shortcuts` (
   `zoom` varchar(3) NOT NULL,
   `display_order` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `navbar`
@@ -135,103 +125,64 @@ CREATE TABLE IF NOT EXISTS `status_options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexes for dumped tables
---
-
---
 -- Indexes for table `linkaggregator`
 --
 ALTER TABLE `linkaggregator`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY IF NOT EXISTS (`id`),
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- Indexes for table `map_shortcuts`
 --
 ALTER TABLE `map_shortcuts`
-  ADD PRIMARY KEY (`name`);
+  ADD PRIMARY KEY IF NOT EXISTS (`name`);
 
 --
 -- Indexes for table `navbar`
 --
 ALTER TABLE `navbar`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY IF NOT EXISTS (`id`),
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY IF NOT EXISTS (`id`),
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY IF NOT EXISTS (`username`);
 
 --
 -- Indexes for table `user_sessions`
 --
 ALTER TABLE `user_sessions`
-  ADD PRIMARY KEY (`cookie`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `linkaggregator`
---
-ALTER TABLE `linkaggregator`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `navbar`
---
-ALTER TABLE `navbar`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  ADD PRIMARY KEY IF NOT EXISTS (`cookie`);
 
 --
 -- Indexes for table `issues_list`
 --
 ALTER TABLE `issues_list`
-  ADD PRIMARY KEY (`IssueId`),
-  ADD KEY `issue_status_relationship` (`Status`),
-  ADD KEY `issue_project_relationship` (`ProjectId`);
+  ADD PRIMARY KEY IF NOT EXISTS (`IssueId`),
+  ADD KEY IF NOT EXISTS `issue_status_relationship` (`Status`),
+  ADD KEY IF NOT EXISTS `issue_project_relationship` (`ProjectId`),
+  ADD CONSTRAINT `issue_project_relationship` FOREIGN KEY IF NOT EXISTS (`ProjectId`) REFERENCES `projects` (`ProjectId`),
+  ADD CONSTRAINT `issue_status_relationship` FOREIGN KEY IF NOT EXISTS (`Status`) REFERENCES `status_options` (`status`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
-  ADD PRIMARY KEY (`ProjectId`);
+  ADD PRIMARY KEY IF NOT EXISTS (`ProjectId`),
+  MODIFY `ProjectId` int(11) NOT NULL AUTO_INCREMENT,
+  ADD CONSTRAINT `issue_owner_relationship` FOREIGN KEY IF NOT EXISTS (`OwnerId`) REFERENCES `users` (`username`);
 
 --
 -- Indexes for table `status_options`
 --
 ALTER TABLE `status_options`
-  ADD PRIMARY KEY (`status`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `ProjectId` int(11) NOT NULL AUTO_INCREMENT;
-  ADD CONSTRAINT `issue_owner_relationship` FOREIGN KEY (`OwnerId`) REFERENCES `users` (`username`),
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `issues_list`
---
-ALTER TABLE `issues_list`
-  ADD CONSTRAINT `issue_project_relationship` FOREIGN KEY (`ProjectId`) REFERENCES `projects` (`ProjectId`),
-  ADD CONSTRAINT `issue_status_relationship` FOREIGN KEY (`Status`) REFERENCES `status_options` (`status`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD PRIMARY KEY IF NOT EXISTS (`status`);
