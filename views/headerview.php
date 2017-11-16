@@ -7,6 +7,8 @@
 	<meta property='og:image' content='http://qvvz.uk/images/0f00e3e818b461fb559a78f48ccbe285.gif' />
 	<script src='https://use.fontawesome.com/15e142434c.js'></script>
 	<link rel='stylesheet' type='text/css' href='css/default.css'>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script> <!-- TODO - Keep this locally -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- TODO - Keep this locally -->
 </head>
 
 <body>
