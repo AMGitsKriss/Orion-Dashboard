@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `issues_list` (
 -- Table structure for table `projects`
 --
 
-CREATE TABLE IF NOT EXISTS `projects` (
+CREATE TABLE IF NOT EXISTS `issues_projects` (
   `ProjectId` int(11) NOT NULL,
   `OwnerId` varchar(32) NOT NULL,
   `Name` varchar(128) NOT NULL
@@ -167,16 +167,16 @@ ALTER TABLE `user_sessions`
 -- Indexes for table `issues_list`
 --
 ALTER TABLE `issues_list`
-  ADD PRIMARY KEY IF NOT EXISTS (`IssueId`),
+  ADD PRIMARY KEY IF NOT EXISTS (`IssueId`, `ProjectId`),
   ADD KEY IF NOT EXISTS `issue_status_relationship` (`Status`),
   ADD KEY IF NOT EXISTS `issue_project_relationship` (`ProjectId`),
-  ADD CONSTRAINT `issue_project_relationship` FOREIGN KEY IF NOT EXISTS (`ProjectId`) REFERENCES `projects` (`ProjectId`),
+  ADD CONSTRAINT `issue_project_relationship` FOREIGN KEY IF NOT EXISTS (`ProjectId`) REFERENCES `issues_projects` (`ProjectId`),
   ADD CONSTRAINT `issue_status_relationship` FOREIGN KEY IF NOT EXISTS (`Status`) REFERENCES `status_options` (`status`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Indexes for table `projects`
 --
-ALTER TABLE `projects`
+ALTER TABLE `issues_projects`
   ADD PRIMARY KEY IF NOT EXISTS (`ProjectId`),
   MODIFY `ProjectId` int(11) NOT NULL AUTO_INCREMENT,
   ADD CONSTRAINT `issue_owner_relationship` FOREIGN KEY IF NOT EXISTS (`OwnerId`) REFERENCES `users` (`username`);
@@ -186,3 +186,11 @@ ALTER TABLE `projects`
 --
 ALTER TABLE `status_options`
   ADD PRIMARY KEY IF NOT EXISTS (`status`);
+
+CREATE TABLE IF NOT EXISTS `site_config` ( 
+  `id` INT NOT NULL AUTO_INCREMENT , 
+  `settingName` VARCHAR(128) NOT NULL , 
+  `valueString` VARCHAR(512) NULL , 
+  `editableBy` VARCHAR(128) NULL , 
+  PRIMARY KEY (`id`)
+  ) ENGINE = InnoDB;
