@@ -1,4 +1,15 @@
 RewriteEngine On
-rewriteRule ^map/?$ map/ [L,QSA]
+
+# Refer the map uri to the map folder
+RewriteRule ^map/?$ map/ [L,QSA]
+
+# Refer every 4-letter, 1st-level, URI to the URL shortener
 RewriteRule ^(....)/?$ index.php/?link=$1 [L,QSA]
+
+# Refer every other first level uri to a page variable
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([0-9a-zA-Z]+)/?$ index.php/?page=$1 [L,QSA]
+
+# Rever first and second lebel uri like so...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9a-zA-Z]+)/([0-9a-zA-Z]+)? index.php/?page=$1&sub1=$2 [L,QSA]
