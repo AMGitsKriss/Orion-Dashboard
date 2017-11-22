@@ -52,7 +52,7 @@
 		$cache_file = fopen($ts3_cache_dir, "w");
 
 		//Declare table
-		fwrite($cache_file, "<table class=players-table table-bordered table-striped>\n<thead>\n<tr>\n<th title='&plusmn;1 min'>Teamspeak</th>\n</tr>\n</thead>\n<tbody>\n");
+		fwrite($cache_file, "<table table-bordered table-striped>\n<thead>\n<tr>\n<th title='&plusmn;1 min'>Teamspeak</th>\n</tr>\n</thead>\n<tbody>\n");
 
 		// query channelist from virtual server
 		foreach($ts3_VirtualServer->channelList() as $ts3_Channel){
