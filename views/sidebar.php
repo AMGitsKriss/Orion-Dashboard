@@ -6,7 +6,7 @@
 			<tbody>
 				<?php foreach( $element as $player ): ?>
 					<tr><td>
-						<img src='$player[1]' /><?php echo $player[0]; ?>
+						<img src='<?php echo $player['1']; ?>' /><?php echo $player[0]; ?>
 					</td></tr>
 				<?php endforeach; ?>
 			</tbody>
