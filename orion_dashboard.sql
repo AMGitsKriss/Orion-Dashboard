@@ -93,13 +93,13 @@ CREATE TABLE IF NOT EXISTS `user_sessions` (
 --
 
 CREATE TABLE IF NOT EXISTS `issues_list` (
-  `IssueId` varchar(32) NOT NULL COMMENT 'Primary Key. ',
+  `IssueId` varchar(32) NOT NULL COMMENT 'Primary Key.',
   `Name` varchar(255) NOT NULL COMMENT 'A name for the task.',
   `URL` varchar(2083) NOT NULL COMMENT 'IE URL limit.',
   `IsActive` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Is it worth caring about?',
   `Status` varchar(32) NOT NULL COMMENT 'Foreign key to a status table.',
   `Notes` text NOT NULL,
-  `ProjectId` int(11) NOT NULL
+  `ProjectId` int(11) NOT NULL COMMENT 'Primary Key.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -194,3 +194,16 @@ CREATE TABLE IF NOT EXISTS `site_config` (
   `editableBy` VARCHAR(128) NULL , 
   PRIMARY KEY (`id`)
   ) ENGINE = InnoDB;
+
+-- GET active issues by Username and ProjectId, to make sure the user is incapable of viewing someone elses list.
+CREATE PROCEDURE IF NOT EXISTS getIssuesByUsernameProjectId(_Username VARCHAR(32), _ProjectId int(11))
+  SELECT * FROM issues_list LEFT JOIN issues_projects ON issues_list.ProjectId = issues_projects.ProjectId WHERE issues_list.ProjectId = _ProjectId AND OwnerId = _Username AND IsActive = 1;
+
+-- GET active issues by Username the complete list of issues fo the user.
+CREATE PROCEDURE IF NOT EXISTS getIssuesByUsername(_Username VARCHAR(32))
+  SELECT * FROM issues_list LEFT JOIN issues_projects  ON issues_list.ProjectId = issues_projects.ProjectId WHERE OwnerId = _Username AND IsActive = 1;
+
+--IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'users') AND name = 'SelectedProject')
+ALTER TABLE `users` 
+  ADD COLUMN IF NOT EXISTS `SelectedProject` INT NULL COMMENT 'The issue tracking project the user has actively selected' AFTER `account_approved`,
+  ADD CONSTRAINT `users_selected_project` FOREIGN KEY IF NOT EXISTS (`SelectedProject`) REFERENCES `issues_projects` (`ProjectId`) ON DELETE SET NULL;
