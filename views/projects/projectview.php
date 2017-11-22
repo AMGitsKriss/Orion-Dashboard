@@ -8,9 +8,9 @@
 	<div class="container">
 		<h2><?php echo $viewData->page_title ?></h2>
 		<ol class="sortable">
-			<li> A | <?php echo $viewData->content[0]->id ?> | <?php echo $viewData->content[0]->name ?></li>
-			<li> B | <?php echo $viewData->content[0]->id ?> | <?php echo $viewData->content[0]->name ?></li>
-			<li> C | <?php echo $viewData->content[0]->id ?> | <?php echo $viewData->content[0]->name ?></li>
+			<?php foreach($viewData->content as $row): ?>
+			<li> <?php echo $row['IssueId'] ?> | <?php echo $row['Name'] ?> | Active: <?php echo $row['IsActive'] ?></li>
+			<?php endforeach; ?>
 		</ol>
 	</div>
 </div>
