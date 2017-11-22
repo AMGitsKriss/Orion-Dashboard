@@ -1,7 +1,8 @@
 <div id=sidebar>
 	<?php foreach ($viewData->sidebar as $element): ?>
 		<?php if (is_array($element)): ?>
-		<table class=players-table table-bordered table-striped>
+		<div class="sidebar-container">
+			<table table-bordered table-striped>
 			<thead><tr><th>Minecraft</th></tr></thead>
 			<tbody>
 				<?php foreach( $element as $player ): ?>
@@ -10,9 +11,11 @@
 					</td></tr>
 				<?php endforeach; ?>
 			</tbody>
-		</table>
+			</table>
+		</div>
 		<?php elseif(is_string($element)): ?>
-		<?php echo $element; ?>
+		<div class="sidebar-container"><?php echo $element; ?></div>
 		<?php endif; ?>
 	<?php endforeach; ?>
+	<div class="sidebar-container">THINGS</div>
 </div>
