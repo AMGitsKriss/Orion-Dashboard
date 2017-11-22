@@ -20,21 +20,21 @@
 		}
 
 		$result = Array();
-		$result["struct"] = "table";
+		$result[0] = ["Minecraft"];
 		if( ( $Players = $Query->GetPlayers( ) ) !== false ){
 			foreach( $Players as $Player ){
 				# Check if we have the thumbnail cached. If not, get it.
 				if(!file_exists("images/avatars/mc/$Player.png")){
 					file_put_contents("images/avatars/mc/$Player.png", file_get_contents("$host/models/MinecraftFace.php?u=$Player&s=30"));
 				}
-				array_push($result, [htmlspecialchars( $Player ), "images/avatars/mc/$Player.png"]);
+				array_push($result, ["<img src='images/avatars/mc/$Player.png'> ".htmlspecialchars( $Player )]);
 			}
 		}
 		elseif(!$Query->GetInfo()){
-			$result = [["<div style='color:red; font-weight:bold; text-align:center;'>SERVER OFFLINE</div>", ""]];
+			array_push($result, ["<div style='color:red; font-weight:bold; text-align:center;'>SERVER OFFLINE</div>"]);
 		}
 		else{
-			$result = [["<div style='text-align:center; width:100%;'>Nobody's Online :(</div>",""]];
+			array_push($result, ["<div style='text-align:center; width:100%;'>Nobody's Online :(</div>"]);
 		}
 		return $result;
 	}
