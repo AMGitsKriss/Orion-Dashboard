@@ -33,9 +33,14 @@
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	}
+	# Sub-page navigator
+	$sub1 = "";
+	if(isset($_GET['sub1'])){
+		$sub1 = $_GET['sub1'];
+	}
 
 	# Aggregator
-	if($_SERVER['QUERY_STRING'] != "" && !isset($_GET['link']) && !isset($_GET['page'])){
+	if($_SERVER['QUERY_STRING'] != "" && !isset($_GET['link']) && !isset($_GET['page']) && !isset($_GET['sub1'])){
 		$page = "links";
 		// Note: This will take ANY server query, so it has to go after every other query.
 	}
