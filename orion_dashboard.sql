@@ -29,18 +29,21 @@ CREATE TABLE IF NOT EXISTS `map_shortcuts` (
   `display_order` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+-- Old table that was replaced by menu
+DROP TABLE IF EXISTS navbar;
 --
--- Table structure for table `navbar`
+-- Table structure for table `menus`
 --
 
-CREATE TABLE IF NOT EXISTS `navbar` (
+CREATE TABLE IF NOT EXISTS `menus` (
   `name` varchar(32) NOT NULL,
   `id` int(4) NOT NULL,
   `url` text NOT NULL,
-  `target` varchar(32) NOT NULL DEFAULT '_self',
+  `target` varchar(32) NOT NULL DEFAULT '_self' COMMENT 'Just in case a link wants to open in a new window',
   `icon` varchar(64) NOT NULL,
-  `alignment` char(1) NOT NULL,
-  `link_order` varchar(2) NOT NULL
+  `location` varchar(64) NOT NULL COMMENT 'The location of this link, such as mainmenu, or options',
+  `order` decimal(6,3) NOT NULL COMMENT 'Desired order of elements.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -138,9 +141,9 @@ ALTER TABLE `map_shortcuts`
   ADD PRIMARY KEY IF NOT EXISTS (`name`);
 
 --
--- Indexes for table `navbar`
+-- Indexes for table `menus`
 --
-ALTER TABLE `navbar`
+ALTER TABLE `menus`
   ADD PRIMARY KEY IF NOT EXISTS (`id`),
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
@@ -207,3 +210,6 @@ CREATE PROCEDURE IF NOT EXISTS getIssuesByUsername(_Username VARCHAR(32))
 ALTER TABLE `users` 
   ADD COLUMN IF NOT EXISTS `SelectedProject` INT NULL COMMENT 'The issue tracking project the user has actively selected' AFTER `account_approved`,
   ADD CONSTRAINT `users_selected_project` FOREIGN KEY IF NOT EXISTS (`SelectedProject`) REFERENCES `issues_projects` (`ProjectId`) ON DELETE SET NULL;
+
+CREATE PROCEDURE IF NOT EXISTS getMenu(_Location VARCHAR(64))
+  SELECT * FROM menus WHERE location = _Location ORDER BY 'order' ASC;
