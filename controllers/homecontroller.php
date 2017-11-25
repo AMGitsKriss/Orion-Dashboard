@@ -71,7 +71,9 @@
 	}
 
 	$viewData->sidebar[0] = getUserList($host);
+	$viewData->sidebarStruct[0] = "table";
 	$viewData->sidebar[1] = file_get_contents("views/templates/cache_ts3.html"); // Grab the user cache for TS3
+	$viewData->sidebarStruct[1] = "html";
 
 	// If the ts3 online-users cache file is more than a minute old, we'll regenerate it before displaying it.
 	if(time() - filemtime("views/templates/cache_ts3.html") > 60){
@@ -91,6 +93,6 @@
 		$viewData->content = $row['content'];
 	}
 
-	include_once("views/sidebarview.php");
+	include_once("controllers/sidebarcontroller.php");
 	include_once("views/homeview.php");
 ?>
