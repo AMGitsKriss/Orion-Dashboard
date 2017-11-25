@@ -28,11 +28,13 @@
 			"updateCookie" => "UPDATE user_sessions WHERE cookie = ? SET updated=CURRENT_TIMESTAMP",
 			"selectRossQuotes" => "SELECT * FROM posts WHERE category = 'Ross Quotes' ORDER BY RAND() LIMIT 1",
 			"updateUserPass" => "UPDATE users WHERE username = ? SET password = ?",
-			"selectIssuesByUsername" => "CALL getIssuesByUsername(?)"
+			"getMenu" => "CALL getMenu(?)"
 		];
 
 		//Initialise the connection.
-		function __construct($servername, $dbname, $username, $password){
+		function __construct($servername, $dbname, $username, $password, $sql = []){
+			// Add to the array of SQL calls
+			$this->sql = array_merge($this->sql, $sql);
 			try{
 				$this->conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 			}
