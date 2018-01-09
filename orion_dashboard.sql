@@ -215,4 +215,4 @@ CREATE PROCEDURE IF NOT EXISTS getMenu(_Location VARCHAR(64))
   SELECT * FROM menus WHERE location = _Location ORDER BY 'order' ASC;
   
 ALTER TABLE `issues_list` 
-  ADD COLUMN IF NOT EXISTS `DisplayOrder` INT NULL COMMENT 'Saved order to display issues in on page'
+  ADD COLUMN IF NOT EXISTS `DisplayOrder` INT NULL COMMENT 'Saved order to display issues in on page';
