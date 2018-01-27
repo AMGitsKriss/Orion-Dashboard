@@ -1,7 +1,6 @@
 <?php
 
-	include_once("views/header.php");
-	$output .= "<section>";
+	include_once("controllers/commoncontroller.php");
 
 	$userData = $loginCheck->getUser($username);
 
@@ -25,6 +24,15 @@
 
 	$userMapShortcut = $database->query("selectMapShortcut", $username)->fetch(PDO::FETCH_ASSOC);
 
-	include_once("views/account.php");
+	# Build the position update form. 
+	# If the $userMapShortcut variable is a string, it's not in the list.
+	if(gettype($userMapShortcut) == "string"){ # $userMapShortcut[zoom]
+		$userMapShortcut = ["name"=>"", "x_pos"=>"", "z_pos"=>"", "zoom"=>""];
+	}
+
+	// Permitted levels of zoom
+	$zoomLevels = ["Max", -1, -2, -3, -4, -5];
+
+	include_once("views/accountview.php");
 
 ?>

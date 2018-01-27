@@ -33,9 +33,22 @@
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	}
+	# Sub-page navigator
+	$subPage1 = "";
+	if(isset($_GET['sub1'])){
+		$subPage1 = $_GET['sub1'];
+	}
+	$subPage2 = "";
+	if(isset($_GET['sub2'])){
+		$subPage2 = $_GET['sub2'];
+	}
+	$subPage3 = "";
+	if(isset($_GET['sub3'])){
+		$subPage3 = $_GET['sub3'];
+	}
 
 	# Aggregator
-	if($_SERVER['QUERY_STRING'] != "" && !isset($_GET['link']) && !isset($_GET['page'])){
+	if($_SERVER['QUERY_STRING'] != "" && !isset($_GET['link']) && !isset($_GET['page']) && !isset($_GET['sub1'])){
 		$page = "links";
 		// Note: This will take ANY server query, so it has to go after every other query.
 	}
@@ -45,23 +58,23 @@
 			# If logged in, go to account. Else, skip to login page.
 			if($loggedIn){
 				$site_title .= ": Account";
-				include_once("controllers/account.php");
+				include_once("controllers/accountcontroller.php");
 				break;
 			}
 		case "links":
 			# If logged in, go to account. Else, skip to login page.
 			if($loggedIn){
 				$site_title .= ": Links";
-				include_once("controllers/mylinks.php");
+				include_once("controllers/linkscontroller.php");
 				break;
 			}
 		case "login":
 			$site_title .= ": Sign In";
-			include_once("controllers/login.php");
+			include_once("controllers/logincontroller.php");
 			break;
 		case "register":
 			$site_title .= ": Register";
-			include_once("controllers/register.php");
+			include_once("controllers/registercontroller.php");
 			break;
 		case "logout":
 			# Destroy the user session.
@@ -70,13 +83,7 @@
 			break;
 		default:
 			$site_title .= ": Dashboard";
-			include_once("controllers/home.php");
+			include_once("controllers/homecontroller.php");
 			break;
 	}
-
-
- 
-	$output .= "</section></body></html>";
-
-	echo $output;
 ?> 
