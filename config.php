@@ -10,6 +10,6 @@
 	$db_pass = "";
 
 	$ts_username = "serveradmin";
-	$ts_password = "atlantis1985";
+	$ts_password = "password";
 
 ?>
