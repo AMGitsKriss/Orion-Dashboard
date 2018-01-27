@@ -43,7 +43,7 @@
 		# Teamspeak people online...
 		require_once("libraries/TeamSpeak3/TeamSpeak3.php");
 		# Connect to the server as admin
-		$ts3_VirtualServer = TeamSpeak3::factory("serverquery://$ts_username:$ts_password@192.168.0.23:10011/?server_port=9987");
+		$ts3_VirtualServer = TeamSpeak3::factory("serverquery://$ts_username:$ts_password@localhost:10011/?server_port=9987");
 	
 		//Cache file location
 		$ts3_cache_dir = "views/templates/cache_ts3.html";
@@ -82,7 +82,7 @@
 		}
 		// We've flooded the query system and timed it out.
 		catch (Exception $e) {
-
+			// TODO - This qants logging
 		}
 	}
 
