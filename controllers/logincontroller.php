@@ -1,8 +1,7 @@
 <?php
 
-	include_once("views/header.php");
-	$output .= "<section>";
-
+	include_once("controllers/commoncontroller.php");
+	
 	$signin_error = "";
 	# A Signed in user shouldn't be able to see this..
 	if($loggedIn) {
@@ -29,5 +28,6 @@
 			$signin_error = "<p class=error>Invalid username or password.</p>";
 		}
 	}
-	require_once("views/login.php");
+
+	require_once("views/loginview.php");
 ?>

@@ -25,7 +25,8 @@ header {
 }
 
 #mainsection {
-	width: calc(100% - 410px);
+	width: calc(100% - 380px);
+	/*max-width: 100%;*/
 }
 
 #wholesection {
@@ -33,7 +34,11 @@ header {
 }
 
 #sidebar {
-	max-width: 410px;
+	width: 380px;
+}
+
+table {
+	width:100%;
 }
 
 header a{
@@ -54,17 +59,20 @@ header a:hover{
 	background-color: #339966;
 }
 
-.players-table, div.container {
+.sidebar-container, div.container {
+	width: calc(100% - 30px);
+	height: 100%;
 	background-color: white;
 	border-width: 1px;
 	border-color: #DDDDDD;
 	border-style: solid;
-	padding: 5px;
-	margin: 0px 10px 10px 0px; /* Bottom and right margins */
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-right: 10px;
 }
 
-.players-table {
-	width: 400px;
+.sidebar-container {
+	width: 350px;
 }
 
 div.container {

@@ -1,4 +1,8 @@
 <?php
+
+	// TODO - How does the namespace thing work?
+	//namespace KConnect;
+
 	class KConnect {
 
 		//Defining the Database Connection and Tables list.
@@ -23,11 +27,14 @@
 			"selectCookie" => "SELECT * FROM user_sessions WHERE cookie = ?",
 			"updateCookie" => "UPDATE user_sessions WHERE cookie = ? SET updated=CURRENT_TIMESTAMP",
 			"selectRossQuotes" => "SELECT * FROM posts WHERE category = 'Ross Quotes' ORDER BY RAND() LIMIT 1",
-			"updateUserPass" => "UPDATE users WHERE username = ? SET password = ?"
+			"updateUserPass" => "UPDATE users WHERE username = ? SET password = ?",
+			"getMenu" => "CALL getMenu(?)"
 		];
 
 		//Initialise the connection.
-		function __construct($servername, $dbname, $username, $password){
+		function __construct($servername, $dbname, $username, $password, $sql = []){
+			// Add to the array of SQL calls
+			$this->sql = array_merge($this->sql, $sql);
 			try{
 				$this->conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 			}
