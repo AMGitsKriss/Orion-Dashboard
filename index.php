@@ -34,9 +34,17 @@
 		$page = $_GET['page'];
 	}
 	# Sub-page navigator
-	$sub1 = "";
+	$subPage1 = "";
 	if(isset($_GET['sub1'])){
-		$sub1 = $_GET['sub1'];
+		$subPage1 = $_GET['sub1'];
+	}
+	$subPage2 = "";
+	if(isset($_GET['sub2'])){
+		$subPage2 = $_GET['sub2'];
+	}
+	$subPage3 = "";
+	if(isset($_GET['sub3'])){
+		$subPage3 = $_GET['sub3'];
 	}
 
 	# Aggregator
@@ -58,13 +66,6 @@
 			if($loggedIn){
 				$site_title .= ": Links";
 				include_once("controllers/linkscontroller.php");
-				break;
-			}
-		case "projects":
-			# If logged in, go to account. Else, skip to login page.
-			if($loggedIn){
-				$site_title .= ": Project Tracking";
-				include_once("controllers/projects/projects.php");
 				break;
 			}
 		case "login":

@@ -1,6 +1,11 @@
 <?php
 class IssuesRepo extends KConnect{
 
+	/*
+		This class is now moot, as the ISsues functionality was abandoned. 
+		It remains an an example of database integration.
+	*/
+
 	// Overriding
 	private $sql = [
 			"getIssuesByUsername" => "CALL getIssuesByUsername(?)",

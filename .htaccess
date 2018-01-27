@@ -12,4 +12,16 @@ RewriteRule ^([0-9a-zA-Z]+)/?$ index.php/?page=$1 [L,QSA]
 
 # Rever first and second lebel uri like so...
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([0-9a-zA-Z]+)/([0-9a-zA-Z]+)? index.php/?page=$1&sub1=$2 [L,QSA]
+RewriteRule ^([0-9a-zA-Z]+)/([0-9a-zA-Z]+)?$ index.php/?page=$1&sub1=$2 [L,QSA]
+
+# Rever first and second and third lebel uri like so...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9a-zA-Z]+)/([0-9a-zA-Z]+)/([0-9a-zA-Z]+)?$ index.php/?page=$1&sub1=$2&sub2=$3 [L,QSA]
+
+# Rever first and second and third and fourth lebel uri like so...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9a-zA-Z]+)/([0-9a-zA-Z]+)/([0-9a-zA-Z]+)/([0-9a-zA-Z]+)?$ index.php/?page=$1&sub1=$2&sub2=$3&sub3=$4 [L,QSA]
+
+# Rever first and second and third and fourth lebel uri like so...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9a-zA-Z]+)/([0-9a-zA-Z]+)/([0-9a-zA-Z]+)/([0-9a-zA-Z]+)/([0-9a-zA-Z]+)?$ index.php/?page=$1&sub1=$2&sub2=$3&sub3=$4&sub4=$5 [L,QSA]
