@@ -12,6 +12,7 @@ Gaming community dashboard.
 [Jira|http://jira.qvvz.uk]
 
 #### Config.php
+```
 <?php
 	ini_set("display_startup_errors", 1); // Show Errors
 	$host = "http://localhost/"; // Address for URLs
@@ -22,3 +23,4 @@ Gaming community dashboard.
 	$ts_username = "serveradmin";
 	$ts_password = "password";
 ?>
+```
