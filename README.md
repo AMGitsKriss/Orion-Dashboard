@@ -1,15 +1,24 @@
 # Orion-Dashboard
 Gaming community dashboard. 
 
-### TODO List
+#### Notes
+* The following is the order of priority that URL's are resolved by:
+  1. A folder directory.
+  2. A page's GET statement.
+  3. URL Shortener (URL Query String)
+* URL Poster/Shortener: http://localhost/? ...
 
-#### URL Structure
-* /page One of the following (in order of priority): 
-  * A folder directory.
-  * A page's GET statement.
-  * URL Shortener
-* /? URL Poster/Shortener
+#### Issue Tracking & Planning
+[Jira|http://jira.qvvz.uk]
 
-#### Database Tables
-* The navbar table isn't needed. 
-* linkaggregator->public seems redundant. 
+#### Config.php
+<?php
+	ini_set("display_startup_errors", 1); // Show Errors
+	$host = "http://localhost/"; // Address for URLs
+	$site_title = "Orion"; 
+	$db_name = "orion_dashboard";
+	$db_user = "root";
+	$db_pass = "";
+	$ts_username = "serveradmin";
+	$ts_password = "password";
+?>
