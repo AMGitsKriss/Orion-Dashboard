@@ -139,3 +139,38 @@ CREATE TABLE IF NOT EXISTS `site_config` (
 -- Get menu by location
 CREATE PROCEDURE IF NOT EXISTS getMenu(_Location VARCHAR(64))
   SELECT * FROM menus WHERE location = _Location ORDER BY 'order' ASC;
+
+-- Minecraft known-players table
+CREATE TABLE IF NOT EXISTS `mc_players` ( 
+  `mc_username` INT NOT NULL AUTO_INCREMENT , 
+  `last_active` timestamp NULL , 
+  `mc_avatar` varchar(255) NULL,
+  PRIMARY KEY (`mc_username`)
+  ) ENGINE = InnoDB;
+
+-- drop the old mc_avatar col from users
+ALTER TABLE `users` DROP COLUMN IF EXISTS `mc_avatar`;
+
+-- Minecraft Logs
+CREATE TABLE IF NOT EXISTS `mc_logs` ( 
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `raw` VARCHAR(255) NOT NULL,
+  `world` VARCHAR(128) NOT NULL,
+  `filename` VARCHAR(128) NOT NULL, 
+  `date` date NOT NULL, 
+  `time` time NOT NULL, 
+
+  `task` VARCHAR(128) NOT NULL, 
+  `user` VARCHAR(128) NULL, -- Refer to the players table
+  `message` text NOT NULL, 
+
+  `ip` VARCHAR(15) NULL, 
+  `uuid` VARCHAR(36) NULL, 
+  `skipped_ticks` VARCHAR(32) NULL, 
+  `millis_behind` VARCHAR(32) NULL, 
+  `login_logout` bit NOT NULL DEFAULT 0, 
+  `x` int NULL, 
+  `y` int NULL, 
+  `z` int NULL, 
+  PRIMARY KEY (`raw`, `date`)
+  ) ENGINE = InnoDB;
