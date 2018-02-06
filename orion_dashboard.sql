@@ -153,7 +153,7 @@ ALTER TABLE `users` DROP COLUMN IF EXISTS `mc_avatar`;
 
 -- Minecraft Logs
 CREATE TABLE IF NOT EXISTS `mc_logs` ( 
-  `id` INT NOT NULL AUTO_INCREMENT ,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `raw` VARCHAR(255) NOT NULL,
   `world` VARCHAR(128) NOT NULL,
   `filename` VARCHAR(128) NOT NULL, 
@@ -172,5 +172,7 @@ CREATE TABLE IF NOT EXISTS `mc_logs` (
   `x` int NULL, 
   `y` int NULL, 
   `z` int NULL, 
-  PRIMARY KEY (`raw`, `date`)
+  `last_parsed` TIMESTAMP NULL COMMENT 'Needs manually setting when an entry is successfully parsed.',
+  PRIMARY KEY (`raw`, `date`),
+  KEY (`id`)
   ) ENGINE = InnoDB;
